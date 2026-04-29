@@ -1,0 +1,39 @@
+# Node.js
+node_modules/
+.env
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnp/
+.pnp.js
+.pnp.cjs
+
+# Build artifacts
+build/
+dist/
+out/
+
+# IDE files
+.vscode/
+.idea/
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
+
+# Thumbnails
+.thumbnails/
+
+# Coverage reports
+coverage/
+.nyc_output/
+
+# Frontend specific (if not already covered by node_modules)
+frontend/build/
+frontend/dist/
+
+# Backend specific (if not already covered by node_modules)
+backend/build/
+backend/dist/
