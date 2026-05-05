@@ -1,10 +1,10 @@
-# 📌 Smart Task Manager (MERN Stack)
+# 📌 SYNC SPACE- A Project Management System (MERN Stack)
 
 A full-stack task management application built using the MERN stack that enables admins to assign tasks and users to track and update progress through an interactive dashboard.
 
 ## 🚀 Project Overview
 
-The Smart Task Manager helps teams efficiently manage workflows by providing:
+The Sync-space helps teams efficiently manage workflows by providing:
 
 -   Role-based access (Admin & User)
 -   Task assignment and tracking
