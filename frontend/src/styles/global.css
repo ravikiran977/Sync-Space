@@ -1,0 +1,38 @@
+/* ============================================
+   global.css
+   App-wide reset — loaded first, affects everything
+   ============================================ */
+
+/* Makes padding stay INSIDE width on every element */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* Remove default margin/padding browsers add */
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Prevent images from overflowing their containers */
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Remove default list styles */
+ul, ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Remove default heading margins */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+}
+
+/* Remove default paragraph margin */
+p {
+  margin: 0;
+}

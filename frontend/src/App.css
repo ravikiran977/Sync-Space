@@ -1,0 +1,9 @@
+.App {
+  min-height: 100vh;
+  color: var(--terra-text);
+  background: var(--terra-background);
+}
+
+.App-link {
+  color: var(--terra-primary);
+}

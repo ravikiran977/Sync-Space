@@ -1,0 +1,183 @@
+.task-card {
+  background: var(--terra-surface);
+  border: 1px solid rgba(74, 124, 89, 0.12);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 12px;
+  color: var(--terra-text);
+  cursor: grab;
+  box-shadow: var(--terra-shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+}
+
+.task-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(46, 50, 48, 0.08);
+}
+
+.task-card:active {
+  cursor: grabbing;
+  opacity: 0.9;
+}
+
+.task-card-completed {
+  cursor: default;
+  background: #f1eadf;
+}
+
+.task-card-completed:hover {
+  transform: none;
+}
+
+.task-card-topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.task-priority {
+  border-radius: 999px;
+  padding: 5px 10px;
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.task-priority-low {
+  color: var(--terra-primary-dark);
+  background: #e8f0e3;
+}
+
+.task-priority-medium {
+  color: var(--terra-tertiary);
+  background: #efe3c7;
+}
+
+.task-priority-high {
+  color: var(--terra-danger);
+  background: #f7e6df;
+}
+
+.task-date {
+  color: var(--terra-muted);
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.task-title {
+  margin: 0 0 8px 0;
+  color: var(--terra-primary-dark);
+  font-family: "Literata", Georgia, serif;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.task-description {
+  margin: 0 0 14px 0;
+  color: var(--terra-muted);
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.task-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 12px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: #f4eadc;
+  color: var(--terra-muted);
+  font-size: 11px;
+}
+
+.task-meta strong {
+  color: var(--terra-text);
+  font-size: 12px;
+  font-weight: 800;
+  text-align: right;
+}
+
+.task-status-select {
+  width: 100%;
+  min-height: 38px;
+  padding: 8px 34px 8px 10px;
+  border: 1.5px solid rgba(74, 124, 89, 0.18);
+  border-radius: 12px;
+  background-color: #fbf2e7;
+  color: var(--terra-text);
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='11' height='11' viewBox='0 0 12 12'><path fill='%23705c30' d='M6 8L1 3h10z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.task-status-select:hover {
+  border-color: rgba(74, 124, 89, 0.34);
+}
+
+.task-status-select:focus {
+  border-color: var(--terra-primary);
+  background-color: var(--terra-surface);
+  box-shadow: 0 0 0 3px rgba(74, 124, 89, 0.14);
+}
+
+.task-status-select:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.task-btn {
+  width: 100%;
+  min-height: 38px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.delete-btn {
+  color: var(--terra-danger);
+  background: #f7e6df;
+  border: 1px solid rgba(159, 70, 54, 0.18);
+}
+
+.delete-btn:hover {
+  background: #efd6cc;
+  transform: translateY(-1px);
+}
+
+.delete-btn:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 680px) {
+  .task-card {
+    padding: 14px;
+  }
+
+  .task-card-topline,
+  .task-meta {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .task-meta strong {
+    text-align: left;
+  }
+}

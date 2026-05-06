@@ -1,0 +1,25 @@
+{
+  "short_name": "Sync-Space",
+  "name": "Sync-Space",
+  "icons": [
+    {
+      "src": "Logo.png",
+      "sizes": "1024x1024",
+      "type": "image/png"
+    },
+    {
+      "src": "Logo.png",
+      "type": "image/png",
+      "sizes": "1024x1024"
+    },
+    {
+      "src": "Logo.png",
+      "type": "image/png",
+      "sizes": "1024x1024"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#4a7c59",
+  "background_color": "#faf6f0"
+}

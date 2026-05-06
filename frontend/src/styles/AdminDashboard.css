@@ -1,0 +1,204 @@
+.dashboard-container {
+  min-height: 100vh;
+  padding: 24px 32px;
+  color: var(--terra-text);
+  background:
+    repeating-linear-gradient(
+      100deg,
+      rgba(112, 92, 48, 0.035) 0,
+      rgba(112, 92, 48, 0.035) 1px,
+      transparent 1px,
+      transparent 18px
+    ),
+    linear-gradient(180deg, var(--terra-background) 0%, #f4ede2 100%);
+  font-family: "Nunito Sans", "Segoe UI", sans-serif;
+}
+
+.dashboard-container > h2 {
+  margin: 4px 0 20px 0;
+  color: var(--terra-primary-dark);
+  font-family: "Literata", Georgia, serif;
+  font-size: 34px;
+  line-height: 1.1;
+}
+
+.dashboard-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.dashboard-label {
+  color: var(--terra-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 12px;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+.dashboard-header h1 {
+  margin: 0;
+  color: var(--terra-primary-dark);
+  font-family: "Literata", Georgia, serif;
+  font-size: 38px;
+  line-height: 1.05;
+}
+
+.dashboard-subtitle {
+  max-width: 680px;
+  color: var(--terra-muted);
+  margin-top: 10px;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.dashboard-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.primary-btn {
+  border: none;
+  background: var(--terra-primary);
+  color: #fffaf2;
+  font-size: 14px;
+  font-weight: 800;
+  padding: 14px 22px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+  box-shadow: var(--terra-shadow);
+}
+
+.primary-btn:hover {
+  background: var(--terra-primary-dark);
+  transform: translateY(-1px);
+}
+
+.dashboard-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 18px;
+  margin-bottom: 30px;
+}
+
+.summary-card {
+  background: var(--terra-surface);
+  border: 1px solid rgba(74, 124, 89, 0.12);
+  border-radius: 12px;
+  padding: 24px;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: var(--terra-shadow);
+}
+
+.summary-card strong {
+  display: block;
+  margin-top: 10px;
+  color: var(--terra-primary-dark);
+  font-family: "Literata", Georgia, serif;
+  font-size: 34px;
+}
+
+.card-label {
+  color: var(--terra-muted);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.board-panel {
+  background: rgba(255, 250, 242, 0.82);
+  border: 1px solid var(--terra-outline);
+  border-radius: 18px;
+  padding: 26px;
+  box-shadow: var(--terra-shadow);
+}
+
+.board-panel-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.board-panel-header h2 {
+  margin: 0;
+  color: var(--terra-primary-dark);
+  font-family: "Literata", Georgia, serif;
+  font-size: 24px;
+}
+
+.board-panel-header p {
+  margin: 0;
+  color: var(--terra-muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.board {
+  background: rgba(255, 250, 242, 0.5);
+  border: 1px solid rgba(74, 124, 89, 0.1);
+  border-radius: 18px;
+  padding: 14px;
+  overflow-x: auto;
+  box-shadow: var(--terra-shadow);
+}
+
+.board::-webkit-scrollbar {
+  height: 10px;
+}
+
+.board::-webkit-scrollbar-thumb {
+  background: rgba(74, 124, 89, 0.28);
+  border-radius: 10px;
+}
+
+.dashboard-message {
+  margin-top: 22px;
+  padding: 14px 18px;
+  background-color: #e8f0e3;
+  color: var(--terra-primary-dark);
+  border: 1px solid rgba(74, 124, 89, 0.24);
+  border-radius: 12px;
+  max-width: fit-content;
+  font-size: 14px;
+}
+
+@media (max-width: 900px) {
+  .dashboard-container {
+    padding: 18px;
+  }
+
+  .dashboard-header h1,
+  .dashboard-container > h2 {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 680px) {
+  .dashboard-header,
+  .board-panel-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .dashboard-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .dashboard-summary {
+    grid-template-columns: 1fr;
+  }
+}
