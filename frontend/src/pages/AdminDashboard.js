@@ -5,12 +5,14 @@ import axios from "axios";
 import Navbar from "../components/Navbar";
 import TaskBoard from "../components/TaskBoard";
 import DashboardMessage from "../components/DashboardMessage";
+import ViewTask from "../components/ViewTask";
 import "../styles/AdminDashboard.css"
 
 function AdminDashboard() {
   const [tasks, setTasks] = useState([]);
   const [message, setMessage] = useState("");
   const [activeColumn, setActiveColumn] = useState(null);
+  const [selectedTaskId, setSelectedTaskId] = useState(null);
 
   useEffect(() => {
     fetchTasks();
@@ -85,8 +87,9 @@ function AdminDashboard() {
       )
     );
   } catch(error){ 
-  console.error("Error updating task:", error);
-}
+    console.error("Error updating task:", error);
+    throw error;
+  }
   };
 
   return (
@@ -101,12 +104,20 @@ function AdminDashboard() {
           onCreate ={handleCreateTask}
           onDelete={handleDeleteTask}
           onUpdate={handleUpdateTask}
+          onViewTask={setSelectedTaskId}
           activeColumn ={activeColumn}
           setActiveColumn={setActiveColumn}
         />
       </div>
 
       <DashboardMessage message={message} />
+      {selectedTaskId && (
+        <ViewTask
+          taskId={selectedTaskId}
+          onClose={() => setSelectedTaskId(null)}
+          onStatusChange={handleUpdateTask}
+        />
+      )}
     </div>
   );
 }

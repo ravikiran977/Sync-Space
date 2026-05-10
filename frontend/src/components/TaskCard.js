@@ -3,8 +3,9 @@
 import React from "react";
 import "../styles/taskcard.css";
 
-function TaskCard({ task, onDelete, onUpdate }) {
+function TaskCard({ task, onDelete, onUpdate, onView }) {
   const handleChange = (e) => {
+    e.stopPropagation();
     const newStatus = e.target.value;
     onUpdate(task._id, newStatus);
   };
@@ -22,7 +23,16 @@ function TaskCard({ task, onDelete, onUpdate }) {
     <div
       className={`task-card ${task.status === "completed" ? "task-card-completed" : ""}`}
       draggable={task.status !== "completed"}
+      role="button"
+      tabIndex={0}
       onDragStart={handleDragStart}
+      onClick={() => onView?.(task._id)}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          onView?.(task._id);
+        }
+      }}
     >
       <div className="task-card-topline">
         <span className={`task-priority task-priority-${priority}`}>
@@ -43,6 +53,7 @@ function TaskCard({ task, onDelete, onUpdate }) {
         className="task-status-select"
         value={task.status}
         onChange={handleChange}
+        onClick={(e) => e.stopPropagation()}
         disabled={task.status === "completed"}
       >
         <option value="todo">To Do</option>
@@ -53,7 +64,10 @@ function TaskCard({ task, onDelete, onUpdate }) {
 
       <button 
         className="task-btn delete-btn"
-        onClick={() => onDelete(task._id)}
+        onClick={(e) => {
+          e.stopPropagation();
+          onDelete(task._id);
+        }}
       >
         Delete
       </button>

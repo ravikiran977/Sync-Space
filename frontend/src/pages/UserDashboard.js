@@ -4,6 +4,7 @@ import React, { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import Navbar from "../components/Navbar";
+import ViewTask from "../components/ViewTask";
 import "../styles/UserDashboard.css";
 
 const BASE_URL = "http://localhost:5000/api/tasks";
@@ -48,7 +49,7 @@ function StatCard({ label, count, emoji }) {
 }
 
 // ─── Individual task card (draggable) ────────────────────────────────────────
-function TaskCard({ task, onStatusChange }) {
+function TaskCard({ task, onStatusChange, onViewTask }) {
   const priority = task.priority || "medium";
   const colors   = PRIORITY_COLORS[priority] || PRIORITY_COLORS.medium;
 
@@ -62,7 +63,16 @@ function TaskCard({ task, onStatusChange }) {
     <div
       className={`ud-task-card ${isCompleted ? "ud-task-card--done" : ""}`}
       draggable
+      role="button"
+      tabIndex={0}
       onDragStart={handleDragStart}
+      onClick={() => onViewTask(task._id)}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          onViewTask(task._id);
+        }
+      }}
     >
       {/* Priority badge */}
       <span
@@ -94,7 +104,11 @@ function TaskCard({ task, onStatusChange }) {
         className="ud-status-select"
         value={task.status}
         disabled={isCompleted}
-        onChange={(e) => onStatusChange(task._id, e.target.value)}
+        onClick={(e) => e.stopPropagation()}
+        onChange={(e) => {
+          e.stopPropagation();
+          onStatusChange(task._id, e.target.value);
+        }}
       >
         {STATUSES.map((s) => (
           <option key={s.key} value={s.key}>
@@ -111,7 +125,7 @@ function TaskCard({ task, onStatusChange }) {
 }
 
 // ─── Kanban column (droppable) ────────────────────────────────────────────────
-function KanbanColumn({ statusConfig, tasks, onStatusChange, activeCol, setActiveCol }) {
+function KanbanColumn({ statusConfig, tasks, onStatusChange, onViewTask, activeCol, setActiveCol }) {
   const { key, label, emoji } = statusConfig;
   const isDragOver = activeCol === key;
 
@@ -155,6 +169,7 @@ function KanbanColumn({ statusConfig, tasks, onStatusChange, activeCol, setActiv
               key={task._id}
               task={task}
               onStatusChange={onStatusChange}
+              onViewTask={onViewTask}
             />
           ))
         )}
@@ -171,6 +186,7 @@ function UserDashboard() {
   const [error,     setError]     = useState("");
   const [activeCol, setActiveCol] = useState(null);
   const [message,   setMessage]   = useState("");
+  const [selectedTaskId, setSelectedTaskId] = useState(null);
 
   const token    = localStorage.getItem("token");
   const userName = getUserName();
@@ -236,6 +252,7 @@ function UserDashboard() {
       fetchTasks();
       setError("Failed to update task status.");
       setTimeout(() => setError(""), 3000);
+      throw err;
     }
   };
 
@@ -293,6 +310,7 @@ function UserDashboard() {
                 statusConfig={statusConfig}
                 tasks={tasksByStatus(statusConfig.key)}
                 onStatusChange={handleStatusChange}
+                onViewTask={setSelectedTaskId}
                 activeCol={activeCol}
                 setActiveCol={setActiveCol}
               />
@@ -301,6 +319,13 @@ function UserDashboard() {
         )}
 
       </div>
+      {selectedTaskId && (
+        <ViewTask
+          taskId={selectedTaskId}
+          onClose={() => setSelectedTaskId(null)}
+          onStatusChange={handleStatusChange}
+        />
+      )}
     </div>
   );
 }

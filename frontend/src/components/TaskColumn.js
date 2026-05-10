@@ -6,7 +6,7 @@ import CreateTask  from "./CreateTask";
 import Modal from "./Modal";
 import "../styles/TaskColumn.css"
 
-function TaskColumn({ title, tasks, onDelete, onUpdate, status, activeColumn, setActiveColumn, onCreate}) {
+function TaskColumn({ title, tasks, onDelete, onUpdate, onViewTask, status, activeColumn, setActiveColumn, onCreate}) {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -55,6 +55,7 @@ function TaskColumn({ title, tasks, onDelete, onUpdate, status, activeColumn, se
           task={task}
           onUpdate={onUpdate}
           onDelete={onDelete}
+          onView={onViewTask}
           
         />
       ))}

@@ -10,6 +10,7 @@ import CreateTask from "./components/CreateTask";
 import './App.css';
 import ResetPassword from "./pages/ResetPassword";
 import ForgotPassword from "./pages/ForgotPassword";
+import ViewTask from "./components/ViewTask";
 
 function App() {
   return (
@@ -24,6 +25,8 @@ function App() {
         <Route path ="/reset-password" element ={<ResetPassword/>}/>
 
         <Route path ="/forgot-password" element ={<ForgotPassword/>}/>
+
+        <Route path = "/task/:taskId" element = {<ViewTask/>}/>
 
         <Route path = "/AdminDashboard" element = {
           <ProtectedRoute role= "admin">
@@ -41,6 +44,7 @@ function App() {
             <CreateTask/>
           </ProtectedRoute>
         } />
+        
 
       </Routes>
     </BrowserRouter>

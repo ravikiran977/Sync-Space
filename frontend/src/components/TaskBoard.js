@@ -3,7 +3,7 @@
 import React from "react";
 import TaskColumn from "./TaskColumn";
 
-function TaskBoard({ tasks, onDelete, onUpdate,activeColumn, setActiveColumn,onCreate }) {
+function TaskBoard({ tasks, onDelete, onUpdate, onViewTask, activeColumn, setActiveColumn,onCreate }) {
   const getTasksByStatus = (status) =>
     tasks.filter((t) => t.status === status);
 
@@ -16,6 +16,7 @@ function TaskBoard({ tasks, onDelete, onUpdate,activeColumn, setActiveColumn,onC
         onCreate ={onCreate}
         onDelete={onDelete}
         onUpdate={onUpdate}
+        onViewTask={onViewTask}
         activeColumn={activeColumn}
         setActiveColumn={setActiveColumn}
         
@@ -28,6 +29,7 @@ function TaskBoard({ tasks, onDelete, onUpdate,activeColumn, setActiveColumn,onC
         onCreate ={onCreate}
         onDelete={onDelete}
         onUpdate={onUpdate}
+        onViewTask={onViewTask}
         activeColumn={activeColumn}
         setActiveColumn={setActiveColumn}
         
@@ -40,6 +42,7 @@ function TaskBoard({ tasks, onDelete, onUpdate,activeColumn, setActiveColumn,onC
         onCreate ={onCreate}
         onDelete={onDelete}
         onUpdate={onUpdate}
+        onViewTask={onViewTask}
         activeColumn={activeColumn}
         setActiveColumn={setActiveColumn}
         
@@ -52,6 +55,7 @@ function TaskBoard({ tasks, onDelete, onUpdate,activeColumn, setActiveColumn,onC
         onCreate ={onCreate}
         onDelete={onDelete}
         onUpdate={onUpdate}
+        onViewTask={onViewTask}
         activeColumn={activeColumn}
         setActiveColumn={setActiveColumn}
         
