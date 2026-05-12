@@ -8,19 +8,19 @@
       transparent 1px,
       transparent 18px
     ),
-    linear-gradient(180deg, var(--terra-background) 0%, #f4ede2 100%);
+    linear-gradient(180deg, var(--terra-background) 0%, var(--terra-background-end) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 24px;
-  font-family: "Nunito Sans", "Segoe UI", sans-serif;
+  padding: var(--terra-space-lg);
+  font-family: var(--terra-font-body);
 }
 
 .login-card {
   background: var(--terra-surface);
   border: 1px solid var(--terra-outline);
-  border-radius: 20px;
-  padding: 40px 44px;
+  border-radius: var(--terra-radius-2xl);
+  padding: var(--terra-space-40) var(--terra-space-44);
   width: 100%;
   max-width: 420px;
   box-shadow: var(--terra-shadow);
@@ -29,24 +29,24 @@
 .login-brand {
   display: flex;
   align-items: center;
-  gap: 14px;
-  margin-bottom: 28px;
+  gap: var(--terra-space-14);
+  margin-bottom: var(--terra-space-28);
 }
 
 .login-brand img {
   width: 56px;
   height: 56px;
-  border-radius: 16px;
+  border-radius: var(--terra-radius-lg);
   object-fit: cover;
   box-shadow: var(--terra-shadow);
 }
 
 .login-card h2 {
   color: var(--terra-primary-dark);
-  font-family: "Literata", Georgia, serif;
+  font-family: var(--terra-font-display);
   font-size: 28px;
   font-weight: 800;
-  margin: 0 0 6px 0;
+  margin: 0 0 var(--terra-space-6) 0;
   letter-spacing: 0;
 }
 
@@ -58,19 +58,19 @@
 }
 
 .login-error {
-  background: #f7e6df;
+  background: var(--terra-danger-bg);
   color: var(--terra-danger);
-  border: 1px solid rgba(159, 70, 54, 0.24);
-  border-radius: 12px;
-  padding: 11px 14px;
+  border: 1px solid var(--terra-danger-border);
+  border-radius: var(--terra-radius-card);
+  padding: var(--terra-space-11) var(--terra-space-14);
   font-size: 13px;
-  margin-bottom: 16px;
+  margin-bottom: var(--terra-space-md);
 }
 
 .login-form {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: var(--terra-space-14);
 }
 
 .login-form label {
@@ -83,11 +83,11 @@
   width: 100%;
   box-sizing: border-box;
   height: 48px;
-  padding: 10px 14px;
-  border: 1.5px solid rgba(74, 124, 89, 0.18);
-  border-radius: 12px;
+  padding: var(--terra-space-10) var(--terra-space-14);
+  border: 1.5px solid var(--terra-outline);
+  border-radius: var(--terra-radius-card);
   color: var(--terra-text);
-  background: #fbf2e7;
+  background: var(--terra-input-bg);
   font-size: 14px;
   outline: none;
   transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
@@ -98,12 +98,12 @@
 }
 
 .password-field .login-input {
-  padding-right: 90px;
+  padding-right: var(--terra-space-90);
 }
 
 .password-toggle {
   position: absolute;
-  right: 14px;
+  right: var(--terra-space-14);
   top: 50%;
   transform: translateY(-50%);
   border: none;
@@ -121,30 +121,30 @@
 }
 
 .login-input::placeholder {
-  color: #9b927f;
+  color: var(--terra-placeholder);
 }
 
 .login-input:hover {
-  border-color: rgba(74, 124, 89, 0.32);
+  border-color: var(--terra-border-focus);
 }
 
 .login-input:focus {
   border-color: var(--terra-primary);
   background: var(--terra-surface);
-  box-shadow: 0 0 0 3px rgba(74, 124, 89, 0.14);
+  box-shadow: var(--terra-focus-ring);
 }
 
 .login-btn {
   width: 100%;
   height: 48px;
   background: var(--terra-primary);
-  color: #fffaf2;
+  color: var(--terra-white);
   border: none;
-  border-radius: 12px;
+  border-radius: var(--terra-radius-card);
   font-size: 15px;
   font-weight: 800;
   cursor: pointer;
-  margin-top: 4px;
+  margin-top: var(--terra-space-4);
   transition: background-color 0.2s ease, transform 0.15s ease;
 }
 
@@ -165,7 +165,7 @@
 
 .login-extra-links {
   text-align: right;
-  margin-top: 8px;
+  margin-top: var(--terra-space-xs);
 }
 
 .login-extra-links button {
@@ -187,8 +187,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 6px;
-  margin: 18px 0 0 0;
+  gap: var(--terra-space-6);
+  margin: var(--terra-space-18) 0 0 0;
   color: var(--terra-muted);
   font-size: 14px;
 }
@@ -209,6 +209,6 @@
 
 @media (max-width: 480px) {
   .login-card {
-    padding: 28px 22px;
+    padding: var(--terra-space-28) var(--terra-space-22);
   }
 }

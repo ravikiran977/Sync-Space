@@ -1,8 +1,8 @@
 .task-column {
-  background-color: rgba(255, 250, 242, 0.88);
-  border: 1px solid rgba(74, 124, 89, 0.14);
-  border-radius: 12px;
-  padding: 16px;
+  background-color: var(--terra-surface-panel-strong);
+  border: 1px solid var(--terra-border-column);
+  border-radius: var(--terra-radius-card);
+  padding: var(--terra-space-md);
   min-width: 0;
   min-height: 400px;
   display: flex;
@@ -14,21 +14,21 @@
 .task-column.drag-over {
   background-color: #eef3e8;
   border-color: rgba(74, 124, 89, 0.42);
-  box-shadow: 0 0 0 3px rgba(74, 124, 89, 0.12);
+  box-shadow: var(--terra-drag-ring);
 }
 
 .title-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 16px;
+  gap: var(--terra-space-sm);
+  margin-bottom: var(--terra-space-md);
 }
 
 .title-row h3 {
   margin: 0;
   color: var(--terra-primary-dark);
-  font-family: "Literata", Georgia, serif;
+  font-family: var(--terra-font-display);
   font-size: 17px;
   font-weight: 800;
   letter-spacing: 0;
@@ -36,11 +36,11 @@
 
 .add-task-btn {
   background: var(--terra-primary);
-  color: #fffaf2;
+  color: var(--terra-white);
   border: none;
   width: 34px;
   height: 34px;
-  border-radius: 12px;
+  border-radius: var(--terra-radius-card);
   font-size: 20px;
   font-weight: 700;
   line-height: 1;
@@ -60,14 +60,14 @@
 .task-count {
   font-size: 11px;
   color: var(--terra-muted);
-  margin-left: 6px;
+  margin-left: var(--terra-space-6);
 }
 
 .column-empty {
   text-align: center;
-  color: #8a806f;
+  color: var(--terra-muted-warm);
   font-size: 13px;
-  margin-top: 40px;
+  margin-top: var(--terra-space-40);
 }
 
 .task-column::-webkit-scrollbar {
@@ -76,5 +76,5 @@
 
 .task-column::-webkit-scrollbar-thumb {
   background: rgba(74, 124, 89, 0.24);
-  border-radius: 4px;
+  border-radius: var(--terra-radius-xs);
 }

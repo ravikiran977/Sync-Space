@@ -2,8 +2,8 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  padding: 10px 0 22px 0;
+  gap: var(--terra-space-md);
+  padding: var(--terra-space-10) 0 var(--terra-space-22) 0;
 }
 
 .nav-brand,
@@ -13,7 +13,7 @@ nav {
 }
 
 .nav-brand {
-  gap: 10px;
+  gap: var(--terra-space-10);
   color: var(--terra-primary-dark);
   font-size: 18px;
   font-weight: 800;
@@ -22,19 +22,19 @@ nav {
 .nav-brand img {
   width: 40px;
   height: 40px;
-  border-radius: 13px;
+  border-radius: var(--terra-radius-13);
   object-fit: cover;
   box-shadow: var(--terra-shadow);
 }
 
 .nav-actions {
-  gap: 10px;
+  gap: var(--terra-space-10);
 }
 
 nav button {
   min-height: 40px;
-  padding: 8px 18px;
-  border-radius: 12px;
+  padding: var(--terra-space-xs) var(--terra-space-18);
+  border-radius: var(--terra-radius-card);
   cursor: pointer;
   font-size: 13px;
   font-weight: 800;
@@ -50,18 +50,18 @@ nav button {
 
 .nav-actions button:first-child:hover {
   background: var(--terra-surface);
-  border-color: rgba(74, 124, 89, 0.34);
+  border-color: var(--terra-border-focus-strong);
   transform: translateY(-1px);
 }
 
 .nav-actions button:last-child {
   color: var(--terra-danger);
-  background: #f7e6df;
-  border: 1px solid rgba(159, 70, 54, 0.22);
+  background: var(--terra-danger-bg);
+  border: 1px solid var(--terra-danger-border-soft);
 }
 
 .nav-actions button:last-child:hover {
-  background: #efd6cc;
+  background: var(--terra-danger-bg-hover);
   transform: translateY(-1px);
 }
 

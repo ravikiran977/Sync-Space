@@ -17,11 +17,11 @@ const STATUSES = [
   { key: "completed",   label: "Completed",   emoji: "✅" },
 ];
 
-// ─── Priority badge color map ────────────────────────────────────────────────
-const PRIORITY_COLORS = {
-  low:    { bg: "#e8f0e3", text: "#365d42", border: "rgba(74,124,89,0.24)" },
-  medium: { bg: "#efe3c7", text: "#705c30", border: "rgba(112,92,48,0.24)" },
-  high:   { bg: "#f7e6df", text: "#9f4636", border: "rgba(159,70,54,0.24)" },
+// ─── Priority badge class map ────────────────────────────────────────────────
+const PRIORITY_BADGE_CLASSES = {
+  low: "ud-priority-badge--low",
+  medium: "ud-priority-badge--medium",
+  high: "ud-priority-badge--high",
 };
 
 // ─── Helper: decode user name from JWT ──────────────────────────────────────
@@ -51,7 +51,7 @@ function StatCard({ label, count, emoji }) {
 // ─── Individual task card (draggable) ────────────────────────────────────────
 function TaskCard({ task, onStatusChange, onViewTask }) {
   const priority = task.priority || "medium";
-  const colors   = PRIORITY_COLORS[priority] || PRIORITY_COLORS.medium;
+  const priorityClass = PRIORITY_BADGE_CLASSES[priority] || PRIORITY_BADGE_CLASSES.medium;
 
   const handleDragStart = (e) => {
     e.dataTransfer.setData("taskId", task._id);
@@ -76,12 +76,7 @@ function TaskCard({ task, onStatusChange, onViewTask }) {
     >
       {/* Priority badge */}
       <span
-        className="ud-priority-badge"
-        style={{
-          background: colors.bg,
-          color:      colors.text,
-          border:     `1px solid ${colors.border}`,
-        }}
+        className={`ud-priority-badge ${priorityClass}`}
       >
         {priority.toUpperCase()}
       </span>
@@ -162,7 +157,7 @@ function KanbanColumn({ statusConfig, tasks, onStatusChange, onViewTask, activeC
       {/* Task list */}
       <div className="ud-column-body">
         {tasks.length === 0 ? (
-          <p className="ud-column-empty">Drop tasks here</p>
+          <p className="ud-column-empty">No-Tasks Here Yet</p>
         ) : (
           tasks.map((task) => (
             <TaskCard

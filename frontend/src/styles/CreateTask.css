@@ -3,30 +3,30 @@
   flex-direction: column;
   width: 100%;
   gap: 0;
-  font-family: "Nunito Sans", "Segoe UI", sans-serif;
+  font-family: var(--terra-font-body);
 }
 
 .form-title {
   color: var(--terra-primary-dark);
-  font-family: "Literata", Georgia, serif;
+  font-family: var(--terra-font-display);
   font-size: 24px;
   font-weight: 800;
-  margin: 0 0 14px 0;
+  margin: 0 0 var(--terra-space-14) 0;
   letter-spacing: 0;
 }
 
 .form-divider {
   border: none;
-  border-top: 1.5px solid rgba(74, 124, 89, 0.12);
-  margin: 0 0 22px 0;
+  border-top: 1.5px solid var(--terra-border-subtle);
+  margin: 0 0 var(--terra-space-22) 0;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: var(--terra-space-6);
   width: 100%;
-  margin-bottom: 16px;
+  margin-bottom: var(--terra-space-md);
 }
 
 .form-group label {
@@ -38,11 +38,11 @@
 .create-task-input {
   width: 100%;
   box-sizing: border-box;
-  padding: 10px 12px;
-  border: 1.5px solid rgba(74, 124, 89, 0.18);
-  border-radius: 12px;
+  padding: var(--terra-space-10) var(--terra-space-sm);
+  border: 1.5px solid var(--terra-outline);
+  border-radius: var(--terra-radius-card);
   color: var(--terra-text);
-  background: #fbf2e7;
+  background: var(--terra-input-bg);
   font-size: 14px;
   outline: none;
   transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
@@ -53,13 +53,13 @@ input.create-task-input {
 }
 
 .create-task-input:hover {
-  border-color: rgba(74, 124, 89, 0.32);
+  border-color: var(--terra-border-focus);
 }
 
 .create-task-input:focus {
   border-color: var(--terra-primary);
   background: var(--terra-surface);
-  box-shadow: 0 0 0 3px rgba(74, 124, 89, 0.14);
+  box-shadow: var(--terra-focus-ring);
 }
 
 textarea.create-task-input {
@@ -74,11 +74,11 @@ textarea.create-task-input {
   width: 100%;
   box-sizing: border-box;
   height: 44px;
-  padding: 9px 38px 9px 12px;
-  border: 1.5px solid rgba(74, 124, 89, 0.18);
-  border-radius: 12px;
+  padding: var(--terra-space-9) var(--terra-space-38) var(--terra-space-9) var(--terra-space-sm);
+  border: 1.5px solid var(--terra-outline);
+  border-radius: var(--terra-radius-card);
   color: var(--terra-text);
-  background-color: #fbf2e7;
+  background-color: var(--terra-input-bg);
   outline: none;
   cursor: pointer;
   font-size: 14px;
@@ -86,24 +86,24 @@ textarea.create-task-input {
   -webkit-appearance: none;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'><path fill='%23705c30' d='M6 8L1 3h10z'/></svg>");
   background-repeat: no-repeat;
-  background-position: right 14px center;
+  background-position: right var(--terra-space-14) center;
   transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
 
 .create-task-select:hover {
-  border-color: rgba(74, 124, 89, 0.32);
+  border-color: var(--terra-border-focus);
 }
 
 .create-task-select:focus {
   border-color: var(--terra-primary);
   background-color: var(--terra-surface);
-  box-shadow: 0 0 0 3px rgba(74, 124, 89, 0.14);
+  box-shadow: var(--terra-focus-ring);
 }
 
 .form-row-group {
   display: flex;
-  gap: 16px;
-  margin-bottom: 16px;
+  gap: var(--terra-space-md);
+  margin-bottom: var(--terra-space-md);
 }
 
 .form-row-group .form-group {
@@ -113,12 +113,12 @@ textarea.create-task-input {
 
 .create-task-submit {
   width: 100%;
-  padding: 12px;
-  margin-top: 4px;
+  padding: var(--terra-space-sm);
+  margin-top: var(--terra-space-4);
   background: var(--terra-primary);
-  color: #fffaf2;
+  color: var(--terra-white);
   border: none;
-  border-radius: 12px;
+  border-radius: var(--terra-radius-card);
   font-size: 15px;
   font-weight: 800;
   cursor: pointer;
@@ -136,28 +136,28 @@ textarea.create-task-input {
 
 .create-task-message {
   font-size: 13px;
-  padding: 10px 14px;
-  border-radius: 12px;
-  margin-bottom: 12px;
+  padding: var(--terra-space-10) var(--terra-space-14);
+  border-radius: var(--terra-radius-card);
+  margin-bottom: var(--terra-space-sm);
 }
 
 .create-task-message.success {
-  background: #e8f0e3;
+  background: var(--terra-success-bg);
   color: var(--terra-primary-dark);
-  border: 1px solid rgba(74, 124, 89, 0.24);
+  border: 1px solid var(--terra-success-border);
 }
 
 .create-task-message.error {
-  background: #f7e6df;
+  background: var(--terra-danger-bg);
   color: var(--terra-danger);
-  border: 1px solid rgba(159, 70, 54, 0.24);
+  border: 1px solid var(--terra-danger-border);
 }
 
 .create-task-toggle {
   background: var(--terra-primary);
-  color: #fffaf2;
+  color: var(--terra-white);
   border: none;
-  border-radius: 12px;
+  border-radius: var(--terra-radius-card);
   width: 34px;
   height: 34px;
   font-size: 18px;

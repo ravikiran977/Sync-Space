@@ -8,19 +8,19 @@
       transparent 1px,
       transparent 18px
     ),
-    linear-gradient(180deg, var(--terra-background) 0%, #f4ede2 100%);
+    linear-gradient(180deg, var(--terra-background) 0%, var(--terra-background-end) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 24px;
-  font-family: "Nunito Sans", "Segoe UI", sans-serif;
+  padding: var(--terra-space-lg);
+  font-family: var(--terra-font-body);
 }
 
 .register-card {
   width: 100%;
   max-width: 460px;
-  padding: 36px 40px;
-  border-radius: 20px;
+  padding: var(--terra-space-36) var(--terra-space-40);
+  border-radius: var(--terra-radius-2xl);
   background: var(--terra-surface);
   border: 1px solid var(--terra-outline);
   box-shadow: var(--terra-shadow);
@@ -29,22 +29,22 @@
 .register-brand {
   display: flex;
   align-items: center;
-  gap: 14px;
-  margin-bottom: 24px;
+  gap: var(--terra-space-14);
+  margin-bottom: var(--terra-space-lg);
 }
 
 .register-brand img {
   width: 56px;
   height: 56px;
-  border-radius: 16px;
+  border-radius: var(--terra-radius-lg);
   object-fit: cover;
   box-shadow: var(--terra-shadow);
 }
 
 .register-brand h2 {
-  margin: 0 0 6px 0;
+  margin: 0 0 var(--terra-space-6) 0;
   color: var(--terra-primary-dark);
-  font-family: "Literata", Georgia, serif;
+  font-family: var(--terra-font-display);
   font-size: 28px;
   font-weight: 800;
 }
@@ -57,28 +57,28 @@
 }
 
 .register-alert {
-  margin: 0 0 16px 0;
-  padding: 11px 14px;
-  border-radius: 12px;
+  margin: 0 0 var(--terra-space-md) 0;
+  padding: var(--terra-space-11) var(--terra-space-14);
+  border-radius: var(--terra-radius-card);
   font-size: 13px;
 }
 
 .register-alert-error {
   color: var(--terra-danger);
-  background: #f7e6df;
-  border: 1px solid rgba(159, 70, 54, 0.24);
+  background: var(--terra-danger-bg);
+  border: 1px solid var(--terra-danger-border);
 }
 
 .register-alert-success {
   color: var(--terra-primary-dark);
-  background: #e8f0e3;
-  border: 1px solid rgba(74, 124, 89, 0.24);
+  background: var(--terra-success-bg);
+  border: 1px solid var(--terra-success-border);
 }
 
 .register-form {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: var(--terra-space-sm);
 }
 
 .register-form label {
@@ -92,30 +92,30 @@
   width: 100%;
   box-sizing: border-box;
   height: 46px;
-  padding: 10px 14px;
-  border: 1.5px solid rgba(74, 124, 89, 0.18);
-  border-radius: 12px;
+  padding: var(--terra-space-10) var(--terra-space-14);
+  border: 1.5px solid var(--terra-outline);
+  border-radius: var(--terra-radius-card);
   color: var(--terra-text);
-  background: #fbf2e7;
+  background: var(--terra-input-bg);
   font-size: 14px;
   outline: none;
   transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
 
 .register-input::placeholder {
-  color: #9b927f;
+  color: var(--terra-placeholder);
 }
 
 .register-input:hover,
 .register-select:hover {
-  border-color: rgba(74, 124, 89, 0.32);
+  border-color: var(--terra-border-focus);
 }
 
 .register-input:focus,
 .register-select:focus {
   border-color: var(--terra-primary);
   background: var(--terra-surface);
-  box-shadow: 0 0 0 3px rgba(74, 124, 89, 0.14);
+  box-shadow: var(--terra-focus-ring);
 }
 
 .register-select {
@@ -124,17 +124,17 @@
   -webkit-appearance: none;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'><path fill='%23705c30' d='M6 8L1 3h10z'/></svg>");
   background-repeat: no-repeat;
-  background-position: right 14px center;
-  padding-right: 38px;
+  background-position: right var(--terra-space-14) center;
+  padding-right: var(--terra-space-38);
 }
 
 .register-btn {
   width: 100%;
   height: 48px;
-  margin-top: 6px;
+  margin-top: var(--terra-space-6);
   border: none;
-  border-radius: 12px;
-  color: #fffaf2;
+  border-radius: var(--terra-radius-card);
+  color: var(--terra-white);
   background: var(--terra-primary);
   font-size: 15px;
   font-weight: 800;
@@ -156,8 +156,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 6px;
-  margin: 18px 0 0 0;
+  gap: var(--terra-space-6);
+  margin: var(--terra-space-18) 0 0 0;
   color: var(--terra-muted);
   font-size: 14px;
 }
@@ -178,6 +178,6 @@
 
 @media (max-width: 480px) {
   .register-card {
-    padding: 28px 22px;
+    padding: var(--terra-space-28) var(--terra-space-22);
   }
 }
