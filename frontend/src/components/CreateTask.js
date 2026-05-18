@@ -4,13 +4,13 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../styles/CreateTask.css";
 
-function CreateTask({ onCreate, defaultStatus, hideStatus, compact=false }) {
+function CreateTask({ onCreate, defaultStatus, hideStatus, compact = false }) {
   const [showForm, setShowForm] = useState(!compact); // ✅ toggle form
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [status, setStatus] = useState(defaultStatus ||"todo");
+  const [status, setStatus] = useState(defaultStatus || "todo");
   const [message, setMessage] = useState("");
   const [dueDate, setDueDate] = useState("");
   const [priority, setPriority] = useState("medium");
@@ -20,14 +20,11 @@ function CreateTask({ onCreate, defaultStatus, hideStatus, compact=false }) {
       try {
         const token = localStorage.getItem("token");
 
-        const response = await axios.get(
-          "http://localhost:5000/api/users",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const response = await axios.get("http://localhost:5000/api/users", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
         setUsers(response.data);
       } catch (error) {
@@ -58,13 +55,9 @@ function CreateTask({ onCreate, defaultStatus, hideStatus, compact=false }) {
     // ✅ send to parent (AdminDashboard)
     onCreate(newTask);
 
-    const selectedUsername = users.find(
-      (user) => user._id === selectedUser
-    );
+    const selectedUsername = users.find((user) => user._id === selectedUser);
 
-    setMessage(
-      `Task "${title}" assigned to ${selectedUsername?.name} created`
-    );
+    setMessage(`Task "${title}" assigned to ${selectedUsername?.name} created`);
 
     // ✅ reset form
     setTitle("");
@@ -82,11 +75,8 @@ function CreateTask({ onCreate, defaultStatus, hideStatus, compact=false }) {
     <div className="create-task-wrapper">
       {/* ✅ BUTTON */}
       {compact && (
-        <button
-        className="create-task-toggle"
-        onClick={() => setShowForm(!showForm)}
-        >
-        {showForm ? "Close" : "+"}
+        <button className="create-task-toggle" onClick={() => setShowForm(!showForm)}>
+          {showForm ? "Close" : "+"}
         </button>
       )}
 
@@ -106,7 +96,7 @@ function CreateTask({ onCreate, defaultStatus, hideStatus, compact=false }) {
       <h2 className="form-title">Create Task</h2>
       <hr className="form-divider" />
       {/* ✅ FORM */}
-      {(showForm || !compact )&& (
+      {(showForm || !compact) && (
         <form className="create-task-form" onSubmit={handleSubmit}>
           <div className="form-group">
             <label>Task Title :</label>
@@ -130,27 +120,27 @@ function CreateTask({ onCreate, defaultStatus, hideStatus, compact=false }) {
             />
           </div>
 
-          <div className= "form-row-group">
+          <div className="form-row-group">
             <div className="form-group">
               <label>Due Date</label>
-              <input 
+              <input
                 className="create-task-input"
-                type = "date"
-                value ={dueDate}
-                onChange ={(e) => setDueDate(e.target.value)}
+                type="date"
+                value={dueDate}
+                onChange={(e) => setDueDate(e.target.value)}
               />
             </div>
 
             <div className="form-group">
               <label>Priority</label>
               <select
-                  className ="create-task-select"
-                  value ={priority}
-                  onChange= {(e) => setPriority(e.target.value)}
-                >
-                <option value ="low"> Low</option>
-                <option value ="medium"> Medium</option>
-                <option value ="high"> High</option>
+                className="create-task-select"
+                value={priority}
+                onChange={(e) => setPriority(e.target.value)}
+              >
+                <option value="low"> Low</option>
+                <option value="medium"> Medium</option>
+                <option value="high"> High</option>
               </select>
             </div>
           </div>

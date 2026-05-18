@@ -71,7 +71,9 @@
   padding: var(--terra-space-14) var(--terra-space-22);
   border-radius: var(--terra-radius-card);
   cursor: pointer;
-  transition: transform 0.2s ease, background-color 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease;
   box-shadow: var(--terra-shadow);
 }
 

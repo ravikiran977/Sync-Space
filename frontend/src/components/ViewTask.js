@@ -67,14 +67,11 @@ const ViewTask = ({ taskId: popupTaskId, onClose, onStatusChange }) => {
           return;
         }
 
-        const response = await axios.get(
-          `http://localhost:5000/api/tasks/${taskId}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const response = await axios.get(`http://localhost:5000/api/tasks/${taskId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
         setTask(response.data);
         setDraftStatus(response.data.status || "todo");
@@ -124,9 +121,7 @@ const ViewTask = ({ taskId: popupTaskId, onClose, onStatusChange }) => {
     } catch (error) {
       console.error("Error updating task status:", error);
       setDraftStatus(previousStatus);
-      setActionError(
-        error.response?.data?.message || "Could not update this task."
-      );
+      setActionError(error.response?.data?.message || "Could not update this task.");
     } finally {
       setSavingStatus(false);
     }
@@ -179,13 +174,11 @@ const ViewTask = ({ taskId: popupTaskId, onClose, onStatusChange }) => {
           >
             x
           </button>
-          
+
           <header className="view-task-header">
             <h1 className="view-task-title">{task.title}</h1>
             <div className="view-task-badges" aria-label="Task labels">
-              <span className="view-task-badge badge-status">
-                {statusLabels[status] || status}
-              </span>
+              <span className="view-task-badge badge-status">{statusLabels[status] || status}</span>
               <span className={`view-task-badge badge-priority-${priority}`}>
                 {priorityLabels[priority] || priority}
               </span>
@@ -244,11 +237,7 @@ const ViewTask = ({ taskId: popupTaskId, onClose, onStatusChange }) => {
             <span className="view-task-side-label">Status</span>
             <label className="view-task-status-field">
               <span className={`view-task-status-dot status-${status}`} />
-              <select
-                value={status}
-                onChange={handleStatusSelect}
-                disabled={savingStatus}
-              >
+              <select value={status} onChange={handleStatusSelect} disabled={savingStatus}>
                 {statuses.map((statusOption) => (
                   <option key={statusOption.value} value={statusOption.value}>
                     {statusOption.label}
@@ -294,16 +283,10 @@ const ViewTask = ({ taskId: popupTaskId, onClose, onStatusChange }) => {
             >
               {savingStatus ? "Saving..." : "Save Changes"}
             </button>
-            <button
-              className="view-task-secondary-btn"
-              type="button"
-              onClick={handleClose}
-            >
+            <button className="view-task-secondary-btn" type="button" onClick={handleClose}>
               Close
             </button>
-            {actionError && (
-              <p className="view-task-action-error">{actionError}</p>
-            )}
+            {actionError && <p className="view-task-action-error">{actionError}</p>}
           </div>
         </aside>
       </main>

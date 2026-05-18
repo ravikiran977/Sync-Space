@@ -11,10 +11,10 @@ const BASE_URL = "http://localhost:5000/api/tasks";
 
 // ─── Status config: label + emoji for each column ───────────────────────────
 const STATUSES = [
-  { key: "todo",        label: "To Do",       emoji: "📋" },
+  { key: "todo", label: "To Do", emoji: "📋" },
   { key: "in-progress", label: "In Progress", emoji: "⚡" },
-  { key: "review",      label: "Review",      emoji: "🔍" },
-  { key: "completed",   label: "Completed",   emoji: "✅" },
+  { key: "review", label: "Review", emoji: "🔍" },
+  { key: "completed", label: "Completed", emoji: "✅" },
 ];
 
 // ─── Priority badge class map ────────────────────────────────────────────────
@@ -75,20 +75,19 @@ function TaskCard({ task, onStatusChange, onViewTask }) {
       }}
     >
       {/* Priority badge */}
-      <span
-        className={`ud-priority-badge ${priorityClass}`}
-      >
-        {priority.toUpperCase()}
-      </span>
+      <span className={`ud-priority-badge ${priorityClass}`}>{priority.toUpperCase()}</span>
 
       <h4 className="ud-task-title">{task.title}</h4>
-      <p  className="ud-task-desc">{task.description}</p>
+      <p className="ud-task-desc">{task.description}</p>
 
       <div className="ud-task-meta">
         {task.dueDate && (
           <span className="ud-task-due">
-            📅 {new Date(task.dueDate).toLocaleDateString("en-IN", {
-              day: "numeric", month: "short", year: "numeric",
+            📅{" "}
+            {new Date(task.dueDate).toLocaleDateString("en-IN", {
+              day: "numeric",
+              month: "short",
+              year: "numeric",
             })}
           </span>
         )}
@@ -112,15 +111,20 @@ function TaskCard({ task, onStatusChange, onViewTask }) {
         ))}
       </select>
 
-      {isCompleted && (
-        <p className="ud-done-label">🎉 Task completed!</p>
-      )}
+      {isCompleted && <p className="ud-done-label">🎉 Task completed!</p>}
     </div>
   );
 }
 
 // ─── Kanban column (droppable) ────────────────────────────────────────────────
-function KanbanColumn({ statusConfig, tasks, onStatusChange, onViewTask, activeCol, setActiveCol }) {
+function KanbanColumn({
+  statusConfig,
+  tasks,
+  onStatusChange,
+  onViewTask,
+  activeCol,
+  setActiveCol,
+}) {
   const { key, label, emoji } = statusConfig;
   const isDragOver = activeCol === key;
 
@@ -175,15 +179,21 @@ function KanbanColumn({ statusConfig, tasks, onStatusChange, onViewTask, activeC
 
 // ─── Main UserDashboard ───────────────────────────────────────────────────────
 function UserDashboard() {
-  const [tasks,     setTasks]     = useState([]);
-  const [stats,     setStats]     = useState({ totalTasks: 0, todo: 0, inProgress: 0, review: 0, completed: 0 });
-  const [loading,   setLoading]   = useState(true);
-  const [error,     setError]     = useState("");
+  const [tasks, setTasks] = useState([]);
+  const [stats, setStats] = useState({
+    totalTasks: 0,
+    todo: 0,
+    inProgress: 0,
+    review: 0,
+    completed: 0,
+  });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
   const [activeCol, setActiveCol] = useState(null);
-  const [message,   setMessage]   = useState("");
+  const [message, setMessage] = useState("");
   const [selectedTaskId, setSelectedTaskId] = useState(null);
 
-  const token    = localStorage.getItem("token");
+  const token = localStorage.getItem("token");
   const userName = getUserName();
 
   // ── Fetch user's assigned tasks ──────────────────────────────────────────
@@ -222,9 +232,7 @@ function UserDashboard() {
   // ── Update task status (local + API) ────────────────────────────────────
   const handleStatusChange = async (taskId, newStatus) => {
     // Optimistic UI update — feels instant
-    setTasks((prev) =>
-      prev.map((t) => (t._id === taskId ? { ...t, status: newStatus } : t))
-    );
+    setTasks((prev) => prev.map((t) => (t._id === taskId ? { ...t, status: newStatus } : t)));
 
     try {
       await axios.put(
@@ -267,7 +275,6 @@ function UserDashboard() {
       <Navbar />
 
       <div className="ud-container">
-
         {/* ── Header ──────────────────────────────────────────────────── */}
         <div className="ud-header">
           <div>
@@ -275,23 +282,21 @@ function UserDashboard() {
               {getGreeting()}, {userName} 👋
             </p>
             <h1 className="ud-heading">My Task Board</h1>
-            <p className="ud-subheading">
-              Track and update your assigned tasks below.
-            </p>
+            <p className="ud-subheading">Track and update your assigned tasks below.</p>
           </div>
         </div>
 
         {/* ── Toast messages ──────────────────────────────────────────── */}
         {message && <div className="ud-toast ud-toast--success">{message}</div>}
-        {error   && <div className="ud-toast ud-toast--error">{error}</div>}
+        {error && <div className="ud-toast ud-toast--error">{error}</div>}
 
         {/* ── Stats summary cards ──────────────────────────────────────── */}
         <div className="ud-stats-row">
-          <StatCard label="Total Tasks"  count={stats.totalTasks} emoji="📊" />
-          <StatCard label="To Do"        count={stats.todo}        emoji="📋" />
-          <StatCard label="In Progress"  count={stats.inProgress}  emoji="⚡" />
-          <StatCard label="In Review"    count={stats.review}      emoji="🔍" />
-          <StatCard label="Completed"    count={stats.completed}   emoji="✅" />
+          <StatCard label="Total Tasks" count={stats.totalTasks} emoji="📊" />
+          <StatCard label="To Do" count={stats.todo} emoji="📋" />
+          <StatCard label="In Progress" count={stats.inProgress} emoji="⚡" />
+          <StatCard label="In Review" count={stats.review} emoji="🔍" />
+          <StatCard label="Completed" count={stats.completed} emoji="✅" />
         </div>
 
         {/* ── Kanban board ─────────────────────────────────────────────── */}
@@ -312,7 +317,6 @@ function UserDashboard() {
             ))}
           </div>
         )}
-
       </div>
       {selectedTaskId && (
         <ViewTask

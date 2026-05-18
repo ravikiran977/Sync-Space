@@ -7,7 +7,7 @@
     "dev": "nodemon server.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Ravi Kiran Vempati",
   "license": "ISC",
   "description": "",
   "dependencies": {

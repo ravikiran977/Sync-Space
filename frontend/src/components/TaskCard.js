@@ -15,10 +15,8 @@ function TaskCard({ task, onDelete, onUpdate, onView }) {
   };
 
   const priority = task.priority || "medium";
-  const dueDate = task.dueDate
-    ? new Date(task.dueDate).toLocaleDateString()
-    : "No due date";
-  
+  const dueDate = task.dueDate ? new Date(task.dueDate).toLocaleDateString() : "No due date";
+
   return (
     <div
       className={`task-card ${task.status === "completed" ? "task-card-completed" : ""}`}
@@ -35,9 +33,7 @@ function TaskCard({ task, onDelete, onUpdate, onView }) {
       }}
     >
       <div className="task-card-topline">
-        <span className={`task-priority task-priority-${priority}`}>
-          {priority}
-        </span>
+        <span className={`task-priority task-priority-${priority}`}>{priority}</span>
         <span className="task-date">{dueDate}</span>
       </div>
 
@@ -62,7 +58,7 @@ function TaskCard({ task, onDelete, onUpdate, onView }) {
         <option value="completed">Completed</option>
       </select>
 
-      <button 
+      <button
         className="task-btn delete-btn"
         onClick={(e) => {
           e.stopPropagation();

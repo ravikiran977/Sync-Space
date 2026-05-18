@@ -19,33 +19,30 @@ router.post("/", async (req, res) => {
 
     res.status(201).json({
       message: "User created successfully",
-      user: newUser
+      user: newUser,
     });
-
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
-
 
 // ==============================
 // GET ALL USERS
 // GET /api/users
 // ==============================
 router.get(
-  "/", 
+  "/",
   authMiddleware,
   authorizeRoles("admin"), // Only admin can access this route
   async (req, res) => {
-  try {
-    const users = await User.find();
-    res.status(200).json(users);
-
-  } catch (error) {
-    res.status(500).json({ error: error.message });
+    try {
+      const users = await User.find();
+      res.status(200).json(users);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
   }
-});
-
+);
 
 // ==============================
 // GET USER BY ID
@@ -59,17 +56,15 @@ router.get("/:id", validateObjectId, authMiddleware, async (req, res) => {
 
     if (!user) {
       return res.status(404).json({
-        message: "User Not Found"
+        message: "User Not Found",
       });
     }
 
     res.status(200).json(user);
-
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
-
 
 // ==============================
 // UPDATE USER BY ID
@@ -83,7 +78,7 @@ router.put("/:id", validateObjectId, authMiddleware, async (req, res) => {
 
     if (!user) {
       return res.status(404).json({
-        message: "User Not Found"
+        message: "User Not Found",
       });
     }
 
@@ -93,14 +88,12 @@ router.put("/:id", validateObjectId, authMiddleware, async (req, res) => {
 
     res.status(200).json({
       message: "User Updated Successfully",
-      user: user
+      user: user,
     });
-
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
-
 
 // ==============================
 // DELETE USER BY ID
@@ -112,20 +105,18 @@ router.delete("/:id", validateObjectId, authMiddleware, async (req, res) => {
 
     if (!deletedUser) {
       return res.status(404).json({
-        message: "User Not Found"
+        message: "User Not Found",
       });
     }
 
     res.status(200).json({
       message: "User Deleted Successfully",
-      user: deletedUser
+      user: deletedUser,
     });
-
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
-
 
 // ==============================
 // LOGIN USER WITH JWT
@@ -133,7 +124,6 @@ router.delete("/:id", validateObjectId, authMiddleware, async (req, res) => {
 // ==============================
 router.post("/login", async (req, res) => {
   try {
-
     const { email, password } = req.body;
 
     console.log("Entered email:", email);
@@ -144,7 +134,7 @@ router.post("/login", async (req, res) => {
 
     if (!user) {
       return res.status(401).json({
-        message: "Invalid email or password"
+        message: "Invalid email or password",
       });
     }
 
@@ -155,23 +145,20 @@ router.post("/login", async (req, res) => {
 
     if (!isMatch) {
       return res.status(401).json({
-        message: "Invalid email or password"
+        message: "Invalid email or password",
       });
     }
 
     // 3️⃣ Generate JWT token
-    const token = jwt.sign(
-      { id: user._id, role: user.role },
-      process.env.JWT_SECRET,
-      { expiresIn: "1h" }
-    );
+    const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, {
+      expiresIn: "1h",
+    });
 
     // 4️⃣ Send response
     res.status(200).json({
       message: "Login successful",
-      token: token
+      token: token,
     });
-
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: error.message });
@@ -182,48 +169,45 @@ router.post("/login", async (req, res) => {
 
 router.post("/forgot-password", async (req, res) => {
   try {
-    const {email} =req.body;
+    const { email } = req.body;
 
     const user = await User.findOne({ email });
 
     if (!user) {
       return res.status(404).json({
-        message: "User Not Found"
+        message: "User Not Found",
       });
     }
-    const resetToken = crypto.randomBytes(20).toString("hex");    //generate random token
+    const resetToken = crypto.randomBytes(20).toString("hex"); //generate random token
 
-    user.resetPasswordToken =resetToken;  //save token in Db and set expire time
-    user.resetPasswordExpire = Date.now() + 15*60*1000; //15 minutes
+    user.resetPasswordToken = resetToken; //save token in Db and set expire time
+    user.resetPasswordExpire = Date.now() + 15 * 60 * 1000; //15 minutes
 
     await user.save();
 
     res.status(200).json({
       message: "Password reset token generated",
-      resetToken
+      resetToken,
     });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
-
 });
 
 // reset password route
 
 router.post("/reset-password", async (req, res) => {
-
   try {
-
     const { token, password } = req.body;
 
     const user = await User.findOne({
       resetPasswordToken: token,
-      resetPasswordExpire: { $gt: Date.now() }
+      resetPasswordExpire: { $gt: Date.now() },
     }).select("+password");
 
     if (!user) {
       return res.status(400).json({
-        message: "Invalid or expired token"
+        message: "Invalid or expired token",
       });
     }
 
@@ -237,15 +221,11 @@ router.post("/reset-password", async (req, res) => {
     await user.save();
 
     res.status(200).json({
-      message: "Password reset successful"
+      message: "Password reset successful",
     });
-
   } catch (error) {
     res.status(500).json({ error: error.message });
-
   }
-
 });
-
 
 module.exports = router;

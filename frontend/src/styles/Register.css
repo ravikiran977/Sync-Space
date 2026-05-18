@@ -99,7 +99,10 @@
   background: var(--terra-input-bg);
   font-size: 14px;
   outline: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
 }
 
 .register-input::placeholder {
@@ -139,7 +142,9 @@
   font-size: 15px;
   font-weight: 800;
   cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.15s ease;
+  transition:
+    background-color 0.2s ease,
+    transform 0.15s ease;
 }
 
 .register-btn:hover:not(:disabled) {

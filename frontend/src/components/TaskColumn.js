@@ -2,20 +2,29 @@
 
 import React, { useState } from "react";
 import TaskCard from "./TaskCard";
-import CreateTask  from "./CreateTask";
+import CreateTask from "./CreateTask";
 import Modal from "./Modal";
-import "../styles/TaskColumn.css"
+import "../styles/TaskColumn.css";
 
-function TaskColumn({ title, tasks, onDelete, onUpdate, onViewTask, status, activeColumn, setActiveColumn, onCreate}) {
-
+function TaskColumn({
+  title,
+  tasks,
+  onDelete,
+  onUpdate,
+  onViewTask,
+  status,
+  activeColumn,
+  setActiveColumn,
+  onCreate,
+}) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleDragOver = (e) =>{
+  const handleDragOver = (e) => {
     e.preventDefault();
     setActiveColumn(status);
-    console.log("drag over triggered", title)
+    console.log("drag over triggered", title);
 
-    if(activeColumn !== status){
+    if (activeColumn !== status) {
       setActiveColumn(status);
     }
   };
@@ -24,20 +33,25 @@ function TaskColumn({ title, tasks, onDelete, onUpdate, onViewTask, status, acti
     e.currentTarget.classList.remove("drag-over");
     console.log("drag leave triggered", title)
   }; */
-  const handleDrop =(e) => {
+  const handleDrop = (e) => {
     e.preventDefault();
-    console.log("drop triggered", title)
+    console.log("drop triggered", title);
 
     const taskId = e.dataTransfer.getData("taskId");
 
     setActiveColumn(null);
 
-    if(onUpdate) {
-      onUpdate(taskId,status);
-   }
+    if (onUpdate) {
+      onUpdate(taskId, status);
+    }
   };
   return (
-    <div className = {`task-column ${activeColumn === status? "drag-over" : ""}`} style={{ flex: 1 }} onDragOver ={handleDragOver} onDrop= {handleDrop}>
+    <div
+      className={`task-column ${activeColumn === status ? "drag-over" : ""}`}
+      style={{ flex: 1 }}
+      onDragOver={handleDragOver}
+      onDrop={handleDrop}
+    >
       <div className="title-row">
         <h3>{title}</h3>
         {/*} <CreateTask
@@ -45,8 +59,9 @@ function TaskColumn({ title, tasks, onDelete, onUpdate, onViewTask, status, acti
           defaultStatus={status}
           hideStatus={true}
         /> */}
-        <button className="add-task-btn" onClick={() => setIsModalOpen(true)}>+</button>
-
+        <button className="add-task-btn" onClick={() => setIsModalOpen(true)}>
+          +
+        </button>
       </div>
 
       {tasks.map((task) => (
@@ -56,26 +71,20 @@ function TaskColumn({ title, tasks, onDelete, onUpdate, onViewTask, status, acti
           onUpdate={onUpdate}
           onDelete={onDelete}
           onView={onViewTask}
-          
         />
       ))}
-      <Modal 
-        isOpen={isModalOpen} 
-        onClose={() => setIsModalOpen(false)}
-        >
-        <CreateTask 
-        onCreate={(task) => {
-        onCreate(task);
-        setIsModalOpen(false); // close modal after create
-        }}
-        defaultStatus={status}
-        hideStatus={true}
-        compact ={false}
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <CreateTask
+          onCreate={(task) => {
+            onCreate(task);
+            setIsModalOpen(false); // close modal after create
+          }}
+          defaultStatus={status}
+          hideStatus={true}
+          compact={false}
         />
       </Modal>
     </div>
-
-    
   );
 }
 

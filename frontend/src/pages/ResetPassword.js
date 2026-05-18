@@ -44,7 +44,10 @@ function ResetPassword() {
       setMessage("Password has been reset successfully. Redirecting to login...");
       setTimeout(() => navigate("/login"), 2000);
     } catch (err) {
-      setError(err.response?.data?.message || "Failed to reset password. The token may be invalid or expired.");
+      setError(
+        err.response?.data?.message ||
+          "Failed to reset password. The token may be invalid or expired."
+      );
     } finally {
       setLoading(false);
     }

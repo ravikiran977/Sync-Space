@@ -6,7 +6,6 @@ import logo from "../Logo.png";
 import "../styles/Login.css";
 
 function Login() {
-
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
@@ -16,30 +15,27 @@ function Login() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-      if(!email || !password) {           // check if fields are empty
-        setError("Please fill all fields");
-        return;
-      }
+    if (!email || !password) {
+      // check if fields are empty
+      setError("Please fill all fields");
+      return;
+    }
 
-      if(!email.includes("@")) {            // basic email validation
-        setError("Please enter a valid email");
-        console.log("Invalid email format");
-        return;
-      }
+    if (!email.includes("@")) {
+      // basic email validation
+      setError("Please enter a valid email");
+      console.log("Invalid email format");
+      return;
+    }
 
     try {
-
       setLoading(true);
       setError("");
 
-      const res = await axios.post(
-        "http://localhost:5000/api/users/login",
-        { email, password }
-      );
+      const res = await axios.post("http://localhost:5000/api/users/login", { email, password });
 
       const token = res.data.token;
 
@@ -56,7 +52,6 @@ function Login() {
       } else {
         navigate("/UserDashboard");
       }
-
     } catch (error) {
       setError(error.response?.data?.message || "Login failed");
     } finally {
@@ -76,7 +71,9 @@ function Login() {
         </div>
         {error && <p className="login-error">{error}</p>}
         <form className="login-form" onSubmit={handleSubmit} noValidate>
-          <label htmlFor="email" className="email-label">Email</label>
+          <label htmlFor="email" className="email-label">
+            Email
+          </label>
           <input
             className="login-input"
             type="email"
@@ -84,7 +81,9 @@ function Login() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <label htmlFor="password" className="password-label">Password</label>
+          <label htmlFor="password" className="password-label">
+            Password
+          </label>
           <div className="password-field">
             <input
               id="password"

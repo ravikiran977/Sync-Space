@@ -45,7 +45,9 @@
   color: var(--terra-tertiary);
   font-size: 20px;
   cursor: pointer;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
 }
 
 .close-btn:hover {

@@ -4,7 +4,6 @@ import React, { useEffect } from "react";
 import "../styles/Modal.css";
 
 function Modal({ isOpen, onClose, children }) {
-  
   // 👉 Close modal when ESC key is pressed
   useEffect(() => {
     const handleEsc = (e) => {
@@ -27,13 +26,8 @@ function Modal({ isOpen, onClose, children }) {
 
   return (
     <div className="modal-overlay" onClick={onClose}>
-      
       {/* Stop closing when clicking inside modal */}
-      <div
-        className="modal-box"
-        onClick={(e) => e.stopPropagation()}
-      >
-        
+      <div className="modal-box" onClick={(e) => e.stopPropagation()}>
         {/* Close button */}
         <button className="close-btn" onClick={onClose}>
           ✖
@@ -41,7 +35,6 @@ function Modal({ isOpen, onClose, children }) {
 
         {/* Dynamic content */}
         {children}
-
       </div>
     </div>
   );

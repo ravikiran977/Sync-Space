@@ -6,7 +6,7 @@ import Navbar from "../components/Navbar";
 import TaskBoard from "../components/TaskBoard";
 import DashboardMessage from "../components/DashboardMessage";
 import ViewTask from "../components/ViewTask";
-import "../styles/AdminDashboard.css"
+import "../styles/AdminDashboard.css";
 
 function AdminDashboard() {
   const [tasks, setTasks] = useState([]);
@@ -22,12 +22,9 @@ function AdminDashboard() {
     try {
       const token = localStorage.getItem("token");
 
-      const response = await axios.get(
-        "http://localhost:5000/api/tasks",
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
+      const response = await axios.get("http://localhost:5000/api/tasks", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
       setTasks(response.data);
     } catch (error) {
@@ -40,13 +37,9 @@ function AdminDashboard() {
     try {
       const token = localStorage.getItem("token");
 
-      const response = await axios.post(
-        "http://localhost:5000/api/tasks",
-        newTask,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
+      const response = await axios.post("http://localhost:5000/api/tasks", newTask, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
       // Add new task instantly to UI
       setTasks((prev) => [...prev, response.data]);
@@ -69,8 +62,7 @@ function AdminDashboard() {
   };
 
   const handleUpdateTask = async (taskId, newStatus) => {
-    
-    try{
+    try {
       const token = localStorage.getItem("token");
 
       await axios.put(
@@ -79,17 +71,13 @@ function AdminDashboard() {
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
-        // refetch to get updated tasklist
-    
-    setTasks((prev) =>
-      prev.map((t) =>
-        t._id === taskId ? { ...t, status: newStatus } : t
-      )
-    );
-  } catch(error){ 
-    console.error("Error updating task:", error);
-    throw error;
-  }
+      // refetch to get updated tasklist
+
+      setTasks((prev) => prev.map((t) => (t._id === taskId ? { ...t, status: newStatus } : t)));
+    } catch (error) {
+      console.error("Error updating task:", error);
+      throw error;
+    }
   };
 
   return (
@@ -101,11 +89,11 @@ function AdminDashboard() {
         {/* ✅ TASK BOARD */}
         <TaskBoard
           tasks={tasks}
-          onCreate ={handleCreateTask}
+          onCreate={handleCreateTask}
           onDelete={handleDeleteTask}
           onUpdate={handleUpdateTask}
           onViewTask={setSelectedTaskId}
-          activeColumn ={activeColumn}
+          activeColumn={activeColumn}
           setActiveColumn={setActiveColumn}
         />
       </div>

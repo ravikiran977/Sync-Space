@@ -90,7 +90,10 @@
   background: var(--terra-input-bg);
   font-size: 14px;
   outline: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
 }
 
 .password-field {
@@ -145,7 +148,9 @@
   font-weight: 800;
   cursor: pointer;
   margin-top: var(--terra-space-4);
-  transition: background-color 0.2s ease, transform 0.15s ease;
+  transition:
+    background-color 0.2s ease,
+    transform 0.15s ease;
 }
 
 .login-btn:hover:not(:disabled) {

@@ -2,8 +2,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cors = require("cors");
-const userRoutes =  require("./routes/userRoutes");
-const taskRouter = require("./routes/taskRoutes")
+const userRoutes = require("./routes/userRoutes");
+const taskRouter = require("./routes/taskRoutes");
 
 dotenv.config();
 
@@ -23,7 +23,8 @@ app.get("/", (req, res) => {
 app.use("/api/tasks", taskRouter);
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGO_URI)
+mongoose
+  .connect(process.env.MONGO_URI)
   .then(() => {
     console.log("MongoDB Connected");
     app.listen(5000, () => {
@@ -31,5 +32,5 @@ mongoose.connect(process.env.MONGO_URI)
     });
   })
   .catch((err) => {
-    console.error("MongoDB Connection Error:", err.message)
+    console.error("MongoDB Connection Error:", err.message);
   });

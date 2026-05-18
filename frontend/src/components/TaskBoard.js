@@ -3,62 +3,65 @@
 import React from "react";
 import TaskColumn from "./TaskColumn";
 
-function TaskBoard({ tasks, onDelete, onUpdate, onViewTask, activeColumn, setActiveColumn,onCreate }) {
-  const getTasksByStatus = (status) =>
-    tasks.filter((t) => t.status === status);
+function TaskBoard({
+  tasks,
+  onDelete,
+  onUpdate,
+  onViewTask,
+  activeColumn,
+  setActiveColumn,
+  onCreate,
+}) {
+  const getTasksByStatus = (status) => tasks.filter((t) => t.status === status);
 
   return (
     <div style={{ display: "flex", gap: "20px", marginTop: "20px" }}>
       <TaskColumn
         title="To Do"
-        status= "todo"
+        status="todo"
         tasks={getTasksByStatus("todo")}
-        onCreate ={onCreate}
+        onCreate={onCreate}
         onDelete={onDelete}
         onUpdate={onUpdate}
         onViewTask={onViewTask}
         activeColumn={activeColumn}
         setActiveColumn={setActiveColumn}
-        
       />
 
       <TaskColumn
         title="In Progress"
-        status= "in-progress"
+        status="in-progress"
         tasks={getTasksByStatus("in-progress")}
-        onCreate ={onCreate}
+        onCreate={onCreate}
         onDelete={onDelete}
         onUpdate={onUpdate}
         onViewTask={onViewTask}
         activeColumn={activeColumn}
         setActiveColumn={setActiveColumn}
-        
       />
 
       <TaskColumn
         title="Review"
-        status= "review"
+        status="review"
         tasks={getTasksByStatus("review")}
-        onCreate ={onCreate}
+        onCreate={onCreate}
         onDelete={onDelete}
         onUpdate={onUpdate}
         onViewTask={onViewTask}
         activeColumn={activeColumn}
         setActiveColumn={setActiveColumn}
-        
       />
 
       <TaskColumn
         title="Completed"
-        status= "completed"
+        status="completed"
         tasks={getTasksByStatus("completed")}
-        onCreate ={onCreate}
+        onCreate={onCreate}
         onDelete={onDelete}
         onUpdate={onUpdate}
         onViewTask={onViewTask}
         activeColumn={activeColumn}
         setActiveColumn={setActiveColumn}
-        
       />
     </div>
   );
