@@ -81,6 +81,7 @@ function TaskCard({ task, onStatusChange, onViewTask }) {
       <p className="ud-task-desc">{task.description}</p>
 
       <div className="ud-task-meta">
+        {task.project?.name && <span className="ud-task-project">{task.project.name}</span>}
         {task.dueDate && (
           <span className="ud-task-due">
             📅{" "}

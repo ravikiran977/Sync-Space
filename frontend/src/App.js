@@ -5,6 +5,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import AdminDashboard from "./pages/AdminDashboard";
 import UserDashboard from "./pages/UserDashboard";
+import CreateProject from "./pages/CreateProject";
 import ProtectedRoute from "./components/ProtectedRoute";
 import CreateTask from "./components/CreateTask";
 import "./App.css";
@@ -50,6 +51,14 @@ function App() {
           element={
             <ProtectedRoute role="admin">
               <CreateTask />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/CreateProject"
+          element={
+            <ProtectedRoute role="admin">
+              <CreateProject />
             </ProtectedRoute>
           }
         />

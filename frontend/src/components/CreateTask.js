@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../styles/CreateTask.css";
 
-function CreateTask({ onCreate, defaultStatus, hideStatus, compact = false }) {
+function CreateTask({ onCreate, defaultStatus, hideStatus, compact = false, projectId }) {
   const [showForm, setShowForm] = useState(!compact); // ✅ toggle form
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState("");
@@ -35,10 +35,16 @@ function CreateTask({ onCreate, defaultStatus, hideStatus, compact = false }) {
     fetchUsers();
   }, []);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    const activeProjectId = projectId || localStorage.getItem("selectedProjectId");
 
-    if (!selectedUser || !title || !description) {
+    if (!activeProjectId) {
+      setMessage("Please select a project before creating a task.");
+      return;
+    }
+
+    if (!selectedUser || !title || !description || !dueDate) {
       setMessage("Please select a user and fill in all fields.");
       return;
     }
@@ -50,10 +56,23 @@ function CreateTask({ onCreate, defaultStatus, hideStatus, compact = false }) {
       dueDate,
       priority,
       status: defaultStatus || status,
+      projectId: activeProjectId,
     };
 
-    // ✅ send to parent (AdminDashboard)
-    onCreate(newTask);
+    try {
+      if (onCreate) {
+        await onCreate(newTask);
+      } else {
+        const token = localStorage.getItem("token");
+
+        await axios.post("http://localhost:5000/api/tasks", newTask, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+      }
+    } catch (error) {
+      setMessage(error.response?.data?.message || "Could not create task.");
+      return;
+    }
 
     const selectedUsername = users.find((user) => user._id === selectedUser);
 
@@ -64,7 +83,7 @@ function CreateTask({ onCreate, defaultStatus, hideStatus, compact = false }) {
     setDescription("");
     setSelectedUser("");
     setDueDate("");
-    setPriority("");
+    setPriority("medium");
     setStatus(defaultStatus || "todo");
 
     // ✅ auto hide message

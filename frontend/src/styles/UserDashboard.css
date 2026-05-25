@@ -288,7 +288,20 @@
 }
 
 .ud-task-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--terra-space-6);
   margin-bottom: var(--terra-space-sm);
+}
+
+.ud-task-project {
+  font-size: 11px;
+  color: var(--terra-primary-dark);
+  background: var(--terra-success-bg);
+  border: 1px solid var(--terra-success-border-soft);
+  padding: var(--terra-space-4) var(--terra-space-9);
+  border-radius: var(--terra-radius-pill);
+  font-weight: 800;
 }
 
 .ud-task-due {

@@ -16,6 +16,7 @@ function TaskColumn({
   activeColumn,
   setActiveColumn,
   onCreate,
+  projectId,
 }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -82,6 +83,7 @@ function TaskColumn({
           defaultStatus={status}
           hideStatus={true}
           compact={false}
+          projectId={projectId}
         />
       </Modal>
     </div>

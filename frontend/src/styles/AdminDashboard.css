@@ -62,6 +62,90 @@
   gap: var(--terra-space-14);
 }
 
+.project-switcher {
+  display: flex;
+  flex-direction: column;
+  gap: var(--terra-space-6);
+  min-width: 240px;
+  color: var(--terra-text);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.project-switcher select {
+  min-height: 44px;
+  border: 1.5px solid var(--terra-outline);
+  border-radius: var(--terra-radius-card);
+  background-color: var(--terra-input-bg);
+  color: var(--terra-text);
+  padding: var(--terra-space-xs) var(--terra-space-38) var(--terra-space-xs)
+    var(--terra-space-sm);
+  font-size: 14px;
+  font-weight: 700;
+  outline: none;
+  cursor: pointer;
+  text-transform: none;
+  letter-spacing: 0;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'><path fill='%23705c30' d='M6 8L1 3h10z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right var(--terra-space-14) center;
+}
+
+.project-switcher select:focus {
+  border-color: var(--terra-primary);
+  background-color: var(--terra-surface);
+  box-shadow: var(--terra-focus-ring);
+}
+
+.dashboard-loading,
+.empty-project-state {
+  min-height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--terra-muted);
+  font-size: 15px;
+}
+
+.empty-project-state {
+  flex-direction: column;
+  gap: var(--terra-space-sm);
+  background: var(--terra-surface-panel);
+  border: 1px solid var(--terra-border-panel);
+  border-radius: var(--terra-radius-card);
+  padding: var(--terra-space-32);
+  text-align: center;
+  box-shadow: var(--terra-shadow);
+}
+
+.empty-project-state h2 {
+  color: var(--terra-primary-dark);
+  font-family: var(--terra-font-display);
+  font-size: 26px;
+}
+
+.empty-project-state p {
+  max-width: 520px;
+  color: var(--terra-muted);
+  line-height: 1.6;
+}
+
+.dashboard-error {
+  width: fit-content;
+  margin-bottom: var(--terra-space-md);
+  padding: var(--terra-space-sm) var(--terra-space-md);
+  background: var(--terra-danger-bg);
+  color: var(--terra-danger);
+  border: 1px solid var(--terra-danger-border);
+  border-radius: var(--terra-radius-card);
+  font-size: 14px;
+  font-weight: 700;
+}
+
 .primary-btn {
   border: none;
   background: var(--terra-primary);
@@ -198,9 +282,14 @@
   .dashboard-actions {
     width: 100%;
     justify-content: flex-start;
+    flex-wrap: wrap;
   }
 
   .dashboard-summary {
     grid-template-columns: 1fr;
+  }
+
+  .project-switcher {
+    min-width: 100%;
   }
 }

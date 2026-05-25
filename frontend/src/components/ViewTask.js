@@ -153,6 +153,7 @@ const ViewTask = ({ taskId: popupTaskId, onClose, onStatusChange }) => {
 
   const assignedName = task.assignedTo?.name || "Unassigned";
   const createdName = task.createdBy?.name || "Unknown";
+  const projectName = task.project?.name || "No project";
   const priority = task.priority || "medium";
   const savedStatus = task.status || "todo";
   const status = draftStatus || savedStatus;
@@ -245,6 +246,11 @@ const ViewTask = ({ taskId: popupTaskId, onClose, onStatusChange }) => {
                 ))}
               </select>
             </label>
+          </div>
+
+          <div className="view-task-side-group">
+            <span className="view-task-side-label">Project</span>
+            <div className="view-task-pill">{projectName}</div>
           </div>
 
           <div className="view-task-side-group">

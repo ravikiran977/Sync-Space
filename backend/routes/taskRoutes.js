@@ -3,21 +3,53 @@ const router = express.Router();
 const mongoose = require("mongoose");
 
 const Task = require("../models/Task");
+const Project = require("../models/Project");
 
 const authMiddleware = require("../middleware/authMiddleware");
 const authorizeRoles = require("../middleware/authorizeRoles");
+
+const getProjectId = (req) => req.query.projectId || req.body.projectId || req.body.project;
+
+const isValidProjectId = (projectId) => mongoose.Types.ObjectId.isValid(projectId);
+
+const buildProjectFilter = (req, res) => {
+  const projectId = req.query.projectId;
+
+  if (!projectId) return {};
+
+  if (!isValidProjectId(projectId)) {
+    res.status(400).json({ message: "Invalid project id" });
+    return null;
+  }
+
+  return { project: new mongoose.Types.ObjectId(projectId) };
+};
 
 // Create a new task - POST /api/tasks from admin login
 
 router.post("/", authMiddleware, authorizeRoles("admin"), async (req, res) => {
   try {
+    const projectId = getProjectId(req);
+
+    if (!projectId || !isValidProjectId(projectId)) {
+      return res.status(400).json({ message: "A valid project is required" });
+    }
+
+    const project = await Project.findById(projectId);
+
+    if (!project) {
+      return res.status(404).json({ message: "Project not found" });
+    }
+
     const task = new Task({
       ...req.body,
+      project: projectId,
       createdBy: req.user.id,
     });
     await task.save();
 
     const populatedTask = await Task.findById(task._id)
+      .populate("project", "name description")
       .populate("assignedTo", "name email")
       .populate("createdBy", "name email");
     res.status(201).json(populatedTask);
@@ -30,7 +62,9 @@ router.post("/", authMiddleware, authorizeRoles("admin"), async (req, res) => {
 
 router.get("/", authMiddleware, authorizeRoles("admin"), async (req, res) => {
   try {
-    const filter = {};
+    const filter = buildProjectFilter(req, res);
+    if (!filter) return;
+
     //filter tasks by status
 
     if (req.query.status) {
@@ -42,6 +76,7 @@ router.get("/", authMiddleware, authorizeRoles("admin"), async (req, res) => {
       filter.assignedTo = req.query.assignedTo;
     }
     const task = await Task.find(filter)
+      .populate("project", "name description")
       .populate("createdBy", "name email")
       .populate("assignedTo", "name email");
     res.status(200).json(task);
@@ -54,7 +89,15 @@ router.get("/", authMiddleware, authorizeRoles("admin"), async (req, res) => {
 
 router.get("/my", authMiddleware, async (req, res) => {
   try {
-    const task = await Task.find({ assignedTo: req.user.id });
+    const projectFilter = buildProjectFilter(req, res);
+    if (!projectFilter) return;
+
+    const filter = {
+      assignedTo: req.user.id,
+      ...projectFilter,
+    };
+
+    const task = await Task.find(filter).populate("project", "name description");
     res.status(200).json(task);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -65,7 +108,13 @@ router.get("/my", authMiddleware, async (req, res) => {
 
 router.get("/dashboard", authMiddleware, authorizeRoles("admin"), async (req, res) => {
   try {
+    const projectFilter = buildProjectFilter(req, res);
+    if (!projectFilter) return;
+
     const stats = await Task.aggregate([
+      {
+        $match: projectFilter,
+      },
       {
         $group: {
           _id: "$status",
@@ -102,9 +151,15 @@ router.get("/dashboard", authMiddleware, authorizeRoles("admin"), async (req, re
 
 router.get("/my-dashboard", authMiddleware, async (req, res) => {
   try {
+    const projectFilter = buildProjectFilter(req, res);
+    if (!projectFilter) return;
+
     const stats = await Task.aggregate([
       {
-        $match: { assignedTo: new mongoose.Types.ObjectId(req.user.id) },
+        $match: {
+          assignedTo: new mongoose.Types.ObjectId(req.user.id),
+          ...projectFilter,
+        },
       },
       {
         $group: {
@@ -142,6 +197,7 @@ router.get("/my-dashboard", authMiddleware, async (req, res) => {
 router.get("/:id", authMiddleware, async (req, res) => {
   try {
     const task = await Task.findById(req.params.id)
+      .populate("project", "name description")
       .populate("createdBy", "name email")
       .populate("assignedTo", "name email");
 

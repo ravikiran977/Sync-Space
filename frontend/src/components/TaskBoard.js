@@ -11,6 +11,7 @@ function TaskBoard({
   activeColumn,
   setActiveColumn,
   onCreate,
+  projectId,
 }) {
   const getTasksByStatus = (status) => tasks.filter((t) => t.status === status);
 
@@ -26,6 +27,7 @@ function TaskBoard({
         onViewTask={onViewTask}
         activeColumn={activeColumn}
         setActiveColumn={setActiveColumn}
+        projectId={projectId}
       />
 
       <TaskColumn
@@ -38,6 +40,7 @@ function TaskBoard({
         onViewTask={onViewTask}
         activeColumn={activeColumn}
         setActiveColumn={setActiveColumn}
+        projectId={projectId}
       />
 
       <TaskColumn
@@ -50,6 +53,7 @@ function TaskBoard({
         onViewTask={onViewTask}
         activeColumn={activeColumn}
         setActiveColumn={setActiveColumn}
+        projectId={projectId}
       />
 
       <TaskColumn
@@ -62,6 +66,7 @@ function TaskBoard({
         onViewTask={onViewTask}
         activeColumn={activeColumn}
         setActiveColumn={setActiveColumn}
+        projectId={projectId}
       />
     </div>
   );

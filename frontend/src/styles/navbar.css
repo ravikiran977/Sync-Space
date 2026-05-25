@@ -31,7 +31,7 @@ nav {
   gap: var(--terra-space-10);
 }
 
-nav button {
+.nav-button {
   min-height: 40px;
   padding: var(--terra-space-xs) var(--terra-space-18);
   border-radius: var(--terra-radius-card);
@@ -45,25 +45,25 @@ nav button {
     border-color 0.2s ease;
 }
 
-.nav-actions button:first-child {
+.nav-button-light {
   color: var(--terra-primary);
   background: rgba(255, 250, 242, 0.78);
   border: 1px solid var(--terra-outline);
 }
 
-.nav-actions button:first-child:hover {
+.nav-button-light:hover {
   background: var(--terra-surface);
   border-color: var(--terra-border-focus-strong);
   transform: translateY(-1px);
 }
 
-.nav-actions button:last-child {
+.nav-button-danger {
   color: var(--terra-danger);
   background: var(--terra-danger-bg);
   border: 1px solid var(--terra-danger-border-soft);
 }
 
-.nav-actions button:last-child:hover {
+.nav-button-danger:hover {
   background: var(--terra-danger-bg-hover);
   transform: translateY(-1px);
 }

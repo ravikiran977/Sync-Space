@@ -7,8 +7,16 @@ import "../styles/navbar.css";
 
 function Navbar() {
   const navigate = useNavigate();
+  const token = localStorage.getItem("token");
+  let role = "";
+
+  try {
+    role = token ? jwtDecode(token).role : "";
+  } catch {
+    role = "";
+  }
+
   const handleDashboard = () => {
-    const token = localStorage.getItem("token");
     if (!token) {
       navigate("/login");
       return;
@@ -41,8 +49,17 @@ function Navbar() {
         <span>Sync-Space</span>
       </div>
       <div className="nav-actions">
-        <button onClick={handleDashboard}> Dashboard</button>
-        <button onClick={handleLogout}> Logout</button>
+        <button className="nav-button nav-button-light" onClick={handleDashboard}>
+          Dashboard
+        </button>
+        {role === "admin" && (
+          <button className="nav-button nav-button-light" onClick={() => navigate("/CreateProject")}>
+            Projects
+          </button>
+        )}
+        <button className="nav-button nav-button-danger" onClick={handleLogout}>
+          Logout
+        </button>
       </div>
     </nav>
   );
