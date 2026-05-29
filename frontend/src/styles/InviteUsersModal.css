@@ -1,0 +1,114 @@
+.invite-users-modal {
+  display: flex;
+  flex-direction: column;
+  gap: var(--terra-space-md);
+}
+
+.invite-users-header h2 {
+  margin: 0 0 var(--terra-space-6);
+  color: var(--terra-primary-dark);
+  font-family: var(--terra-font-display);
+  font-size: 28px;
+  line-height: 1.1;
+}
+
+.invite-users-header span {
+  color: var(--terra-muted);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.invite-error {
+  margin-bottom: 0;
+}
+
+.invite-loading {
+  min-height: 160px;
+}
+
+.invite-empty-state {
+  border: 1px dashed var(--terra-outline);
+  border-radius: var(--terra-radius-card);
+  padding: var(--terra-space-32);
+  color: var(--terra-muted);
+  text-align: center;
+  font-size: 14px;
+}
+
+.invite-user-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--terra-space-10);
+  max-height: 420px;
+  overflow-y: auto;
+  padding-right: var(--terra-space-4);
+}
+
+.invite-user-row {
+  display: grid;
+  grid-template-columns: 22px 1fr auto;
+  align-items: center;
+  gap: var(--terra-space-sm);
+  min-height: 68px;
+  padding: var(--terra-space-sm);
+  border: 1px solid var(--terra-border-subtle);
+  border-radius: var(--terra-radius-card);
+  background: var(--terra-surface-panel-strong);
+  cursor: pointer;
+}
+
+.invite-user-row input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--terra-primary);
+}
+
+.invite-user-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--terra-space-3);
+  min-width: 0;
+}
+
+.invite-user-info strong {
+  color: var(--terra-primary-dark);
+  font-size: 15px;
+}
+
+.invite-user-info span {
+  color: var(--terra-muted);
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
+.invite-user-role {
+  padding: var(--terra-space-4) var(--terra-space-9);
+  border-radius: var(--terra-radius-pill);
+  background: var(--terra-warning-bg);
+  color: var(--terra-tertiary);
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.invite-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--terra-space-sm);
+  padding-top: var(--terra-space-xs);
+}
+
+@media (max-width: 680px) {
+  .invite-user-row {
+    grid-template-columns: 22px 1fr;
+  }
+
+  .invite-user-role {
+    grid-column: 2;
+    width: fit-content;
+  }
+
+  .invite-actions {
+    flex-direction: column-reverse;
+  }
+}

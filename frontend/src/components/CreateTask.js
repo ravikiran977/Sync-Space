@@ -20,10 +20,13 @@ function CreateTask({ onCreate, defaultStatus, hideStatus, compact = false, proj
       try {
         const token = localStorage.getItem("token");
 
+        const activeProjectId = projectId || localStorage.getItem("selectedProjectId");
+
         const response = await axios.get("http://localhost:5000/api/users", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
+          params: activeProjectId ? { projectId: activeProjectId } : {},
         });
 
         setUsers(response.data);
@@ -33,7 +36,7 @@ function CreateTask({ onCreate, defaultStatus, hideStatus, compact = false, proj
     };
 
     fetchUsers();
-  }, []);
+  }, [projectId]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

@@ -7,6 +7,7 @@ import Navbar from "../components/Navbar";
 import TaskBoard from "../components/TaskBoard";
 import DashboardMessage from "../components/DashboardMessage";
 import ViewTask from "../components/ViewTask";
+import InviteUsersModal from "../components/InviteUsersModal";
 import "../styles/AdminDashboard.css";
 
 function AdminDashboard() {
@@ -20,6 +21,7 @@ function AdminDashboard() {
   const [loadingProjects, setLoadingProjects] = useState(true);
   const [loadingTasks, setLoadingTasks] = useState(false);
   const [error, setError] = useState("");
+  const [isInviteModalOpen, setIsInviteModalOpen] = useState(false);
 
   useEffect(() => {
     fetchProjects();
@@ -113,6 +115,19 @@ function AdminDashboard() {
     localStorage.setItem("selectedProjectId", nextProjectId);
     setMessage("");
     setSelectedTaskId(null);
+    setIsInviteModalOpen(false);
+  };
+
+  const openInviteModal = () => {
+    setIsInviteModalOpen(true);
+  };
+
+  const handleUsersInvited = (result) => {
+    setMessage(
+      `Invited ${result.updatedUsers} user${result.updatedUsers === 1 ? "" : "s"} to ${
+        selectedProject?.name || "this project"
+      }.`
+    );
   };
 
   const handleDeleteTask = async (taskId) => {
@@ -185,6 +200,14 @@ function AdminDashboard() {
           <button className="primary-btn" type="button" onClick={() => navigate("/CreateProject")}>
             New Project
           </button>
+          <button
+            className="secondary-action-btn"
+            type="button"
+            onClick={openInviteModal}
+            disabled={!selectedProjectId}
+          >
+            Invite Users
+          </button>
         </div>
       </header>
 
@@ -225,6 +248,12 @@ function AdminDashboard() {
           onStatusChange={handleUpdateTask}
         />
       )}
+      <InviteUsersModal
+        isOpen={isInviteModalOpen}
+        onClose={() => setIsInviteModalOpen(false)}
+        project={selectedProject}
+        onInvited={handleUsersInvited}
+      />
     </div>
   );
 }

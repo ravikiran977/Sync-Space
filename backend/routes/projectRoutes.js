@@ -1,8 +1,10 @@
 const express = require("express");
 const router = express.Router();
+const mongoose = require("mongoose");
 
 const Project = require("../models/Project");
 const Task = require("../models/Task");
+const User = require("../models/User");
 const authMiddleware = require("../middleware/authMiddleware");
 const authorizeRoles = require("../middleware/authorizeRoles");
 
@@ -53,5 +55,52 @@ router.get("/", authMiddleware, async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
+router.post("/:projectId/users", authMiddleware,  authorizeRoles("admin"), async (req, res) => {
+    try {
+      const { projectId } = req.params;
+      const { userIds } = req.body;
+
+      if (!mongoose.Types.ObjectId.isValid(projectId)) {
+        return res.status(400).json({ message: "Invalid project id" });
+      }
+
+      if (!Array.isArray(userIds) || userIds.length === 0) {
+        return res.status(400).json({ message: "Please provide userIds as a non-empty array" });
+      }
+
+      const hasInvalidUserId = userIds.some((userId) => !mongoose.Types.ObjectId.isValid(userId));
+
+      if (hasInvalidUserId) {
+        return res.status(400).json({ message: "One or more user ids are invalid" });
+      }
+
+      const project = await Project.findById(projectId);
+
+      if (!project) {
+        return res.status(404).json({ message: "Project not found" });
+      }
+
+      const updateResult = await User.updateMany(
+        { _id: { $in: userIds } },
+        { $addToSet: { projects: project._id } }
+      );
+
+      const invitedUsers = await User.find({ _id: { $in: userIds } })
+        .select("name email role projects")
+        .populate("projects", "name description");
+
+      res.status(200).json({
+        message: "Users invited to project successfully",
+        project,
+        matchedUsers: updateResult.matchedCount,
+        updatedUsers: updateResult.modifiedCount,
+        users: invitedUsers,
+      });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }
+);
 
 module.exports = router;

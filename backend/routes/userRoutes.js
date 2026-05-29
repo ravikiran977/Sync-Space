@@ -33,10 +33,16 @@ router.post("/", async (req, res) => {
 router.get(
   "/",
   authMiddleware,
-  authorizeRoles("admin"), // Only admin can access this route
-  async (req, res) => {
-    try {
-      const users = await User.find();
+    authorizeRoles("admin"), // Only admin can access this route
+    async (req, res) => {
+      try {
+      const filter = {};
+
+      if (req.query.projectId) {
+        filter.projects = req.query.projectId;
+      }
+
+      const users = await User.find(filter).populate("projects", "name description");
       res.status(200).json(users);
     } catch (error) {
       res.status(500).json({ error: error.message });
