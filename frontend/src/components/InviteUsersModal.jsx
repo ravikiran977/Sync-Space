@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../api/api";
 import Modal from "./Modal";
 import "../styles/InviteUsersModal.css";
 
@@ -20,7 +20,7 @@ function InviteUsersModal({ isOpen, onClose, project, onInvited }) {
         setSelectedUserIds([]);
 
         const token = localStorage.getItem("token");
-        const response = await axios.get("http://localhost:5000/api/users", {
+        const response = await api.get("/users", {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -61,8 +61,8 @@ function InviteUsersModal({ isOpen, onClose, project, onInvited }) {
       setError("");
       const token = localStorage.getItem("token");
 
-      const response = await axios.post(
-        `http://localhost:5000/api/projects/${project._id}/users`,
+      const response = await api.post(
+        `/projects/${project._id}/users`,
         { userIds: selectedUserIds },
         { headers: { Authorization: `Bearer ${token}` } }
       );

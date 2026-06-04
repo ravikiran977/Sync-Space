@@ -1,7 +1,7 @@
 //createTAsk.js
 
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import api from "../api/api";
 import "../styles/CreateTask.css";
 
 function CreateTask({ onCreate, defaultStatus, hideStatus, compact = false, projectId }) {
@@ -22,7 +22,7 @@ function CreateTask({ onCreate, defaultStatus, hideStatus, compact = false, proj
 
         const activeProjectId = projectId || localStorage.getItem("selectedProjectId");
 
-        const response = await axios.get("http://localhost:5000/api/users", {
+        const response = await api.get("/users", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -68,7 +68,7 @@ function CreateTask({ onCreate, defaultStatus, hideStatus, compact = false, proj
       } else {
         const token = localStorage.getItem("token");
 
-        await axios.post("http://localhost:5000/api/tasks", newTask, {
+        await api.post("/tasks", newTask, {
           headers: { Authorization: `Bearer ${token}` },
         });
       }

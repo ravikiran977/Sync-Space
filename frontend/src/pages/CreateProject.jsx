@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import api from "../api/api";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import "../styles/CreateProject.css";
@@ -26,8 +26,8 @@ function CreateProject() {
       setMessage("");
 
       const token = localStorage.getItem("token");
-      const response = await axios.post(
-        "http://localhost:5000/api/projects",
+      const response = await api.post(
+        "/projects",
         {
           name,
           description,

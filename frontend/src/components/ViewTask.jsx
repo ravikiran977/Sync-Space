@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import axios from "axios";
+import api from "../api/api";
 import "../styles/ViewTask.css";
 
 const statusLabels = {
@@ -67,7 +67,7 @@ const ViewTask = ({ taskId: popupTaskId, onClose, onStatusChange }) => {
           return;
         }
 
-        const response = await axios.get(`http://localhost:5000/api/tasks/${taskId}`, {
+        const response = await api.get(`/tasks/${taskId}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -105,8 +105,8 @@ const ViewTask = ({ taskId: popupTaskId, onClose, onStatusChange }) => {
       } else {
         const token = localStorage.getItem("token");
 
-        await axios.put(
-          `http://localhost:5000/api/tasks/${taskId}`,
+        await api.put(
+          `/tasks/${taskId}`,
           { status: draftStatus },
           {
             headers: {

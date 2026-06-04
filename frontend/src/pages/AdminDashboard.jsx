@@ -1,7 +1,7 @@
 //AdminDashboard.js
 
 import React, { useState, useEffect, useCallback } from "react";
-import axios from "axios";
+import api from "../api/api";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import TaskBoard from "../components/TaskBoard";
@@ -31,7 +31,7 @@ function AdminDashboard() {
     try {
       setLoadingProjects(true);
       const token = localStorage.getItem("token");
-      const response = await axios.get("http://localhost:5000/api/projects", {
+      const response = await api.get("/projects", {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -66,7 +66,7 @@ function AdminDashboard() {
       setError("");
       const token = localStorage.getItem("token");
 
-      const response = await axios.get("http://localhost:5000/api/tasks", {
+      const response = await api.get("/tasks", {
         headers: { Authorization: `Bearer ${token}` },
         params: { projectId: selectedProjectId },
       });
@@ -93,8 +93,8 @@ function AdminDashboard() {
     try {
       const token = localStorage.getItem("token");
 
-      const response = await axios.post(
-        "http://localhost:5000/api/tasks",
+      const response = await api.post(
+        "/tasks",
         { ...newTask, projectId: selectedProjectId },
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -135,7 +135,7 @@ function AdminDashboard() {
 
     const taskToDelete = tasks.find((t) => t._id === taskId);
 
-    await axios.delete(`http://localhost:5000/api/tasks/${taskId}`, {
+    await api.delete(`/tasks/${taskId}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
 
@@ -147,8 +147,8 @@ function AdminDashboard() {
     try {
       const token = localStorage.getItem("token");
 
-      await axios.put(
-        `http://localhost:5000/api/tasks/${taskId}`,
+      await api.put(
+        `/tasks/${taskId}`,
         { status: newStatus },
         { headers: { Authorization: `Bearer ${token}` } }
       );

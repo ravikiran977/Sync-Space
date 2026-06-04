@@ -1,13 +1,13 @@
 // src/pages/UserDashboard.js
 
 import React, { useEffect, useState, useCallback } from "react";
-import axios from "axios";
+import api from "../api/api";
 import { jwtDecode } from "jwt-decode";
 import Navbar from "../components/Navbar";
 import ViewTask from "../components/ViewTask";
 import "../styles/UserDashboard.css";
 
-const BASE_URL = "http://localhost:5000/api/tasks";
+const TASKS_URL = "/tasks";
 
 // ─── Status config: label + emoji for each column ───────────────────────────
 const STATUSES = [
@@ -201,7 +201,7 @@ function UserDashboard() {
   const fetchTasks = useCallback(async () => {
     try {
       setLoading(true);
-      const res = await axios.get(`${BASE_URL}/my`, {
+      const res = await api.get(`${TASKS_URL}/my`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setTasks(res.data);
@@ -216,7 +216,7 @@ function UserDashboard() {
   // ── Fetch stats summary ──────────────────────────────────────────────────
   const fetchStats = useCallback(async () => {
     try {
-      const res = await axios.get(`${BASE_URL}/my-dashboard`, {
+      const res = await api.get(`${TASKS_URL}/my-dashboard`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setStats(res.data);
@@ -236,8 +236,8 @@ function UserDashboard() {
     setTasks((prev) => prev.map((t) => (t._id === taskId ? { ...t, status: newStatus } : t)));
 
     try {
-      await axios.put(
-        `${BASE_URL}/${taskId}`,
+      await api.put(
+        `${TASKS_URL}/${taskId}`,
         { status: newStatus },
         { headers: { Authorization: `Bearer ${token}` } }
       );

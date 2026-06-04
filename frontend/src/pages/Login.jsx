@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios from "axios";
+import api from "../api/api";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import logo from "../Logo.png";
@@ -35,7 +35,7 @@ function Login() {
       setLoading(true);
       setError("");
 
-      const res = await axios.post("http://localhost:5000/api/users/login", { email, password });
+      const res = await api.post("/users/login", { email, password });
 
       const token = res.data.token;
 
