@@ -13,7 +13,14 @@ const app = express();
 
 // Middleware
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173", // Local Vite frontend
+      "https://sync-space-gamma.vercel.app", // Deployed frontend
+    ],
+  })
+);
 
 // Routes
 app.use("/api/users", userRoutes);
