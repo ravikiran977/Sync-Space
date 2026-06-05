@@ -109,6 +109,33 @@
   color: var(--terra-placeholder);
 }
 
+.password-field {
+  position: relative;
+}
+
+.password-field .register-input {
+  padding-right: var(--terra-space-90);
+}
+
+.password-toggle {
+  position: absolute;
+  right: var(--terra-space-14);
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  color: var(--terra-muted);
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+  padding: 0;
+  opacity: 0.85;
+}
+
+.password-toggle:hover {
+  color: var(--terra-primary-dark);
+}
+
 .register-input:hover,
 .register-select:hover {
   border-color: var(--terra-border-focus);

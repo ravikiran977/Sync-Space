@@ -15,6 +15,7 @@ function Register() {
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(true);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -102,14 +103,23 @@ function Register() {
           />
 
           <label htmlFor="password">Password</label>
-          <input
-            id="password"
-            className="register-input"
-            type="password"
-            placeholder="Create a password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+          <div className="password-field">
+            <input
+              id="password"
+              className="register-input"
+              type={showPassword ? "text" : "password"}
+              placeholder="Create a password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <button
+              type="button"
+              className="password-toggle"
+              onClick={() => setShowPassword((prev) => !prev)}
+            >
+              {showPassword ? "Hide" : "Show"}
+            </button>
+          </div>
 
           <label htmlFor="confirmPassword">Confirm Password</label>
           <input
