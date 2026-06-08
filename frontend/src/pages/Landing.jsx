@@ -36,6 +36,10 @@ function Landing() {
     });
   };
 
+  const handleRegisterClick = () => {
+    alert("Registration is temporarily disabled to avoid exceeding database limits.\n\nPlease use the demo login credentials provided in the GitHub README file.");
+  };
+
   return (
     <main className="landing-page">
       <nav className="landing-nav" aria-label="Primary">
@@ -45,8 +49,14 @@ function Landing() {
         </div>
 
         <div className="landing-nav-actions">
-          <button className="landing-register-btn" onClick={() => navigate("/register")}>
+          {/* <button className="landing-register-btn" onClick={() => navigate("/register")}>
             Register
+          </button> */}
+          <button className="landing-register-btn" onClick={handleRegisterClick}>
+            Register
+          </button>
+          <button className="landing-register-btn" onClick={() => window.open("https://github.com/ravikiran977/Sync-Space", "_blank")}>
+            GitHub README
           </button>
           <button className="landing-login-btn" onClick={() => navigate("/login")}>
             Login
@@ -139,8 +149,14 @@ function Landing() {
           <span>Ready when your team is</span>
           <h2>Start with a clean workspace and a shared view of progress.</h2>
         </div>
-        <button className="landing-primary-btn" onClick={() => navigate("/register")}>
+        {/* <button className="landing-primary-btn" onClick={() => navigate("/register")}>
           Create Account
+        </button> */}
+        <button className="landing-primary-btn" onClick={handleRegisterClick}>
+          Create Account
+        </button>
+        <button className="landing-secondary-btn" onClick={() => window.open("https://github.com/ravikiran977/Sync-Space", "_blank")}>
+          View Demo Credentials
         </button>
       </section>
 
@@ -160,8 +176,14 @@ function Landing() {
           <button type="button" onClick={() => navigate("/login")}>
             Login
           </button>
-          <button type="button" onClick={() => navigate("/register")}>
+          {/* <button type="button" onClick={() => navigate("/register")}>
             Register
+          </button> */}
+          <button type="button" onClick={handleRegisterClick}>
+            Register
+          </button>
+          <button type="button" onClick={() => window.open("https://github.com/ravikiran977/Sync-Space", "_blank")}>
+            GitHub README
           </button>
         </div>
 

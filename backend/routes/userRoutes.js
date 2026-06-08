@@ -14,6 +14,13 @@ const authorizeRoles = require("../middleware/authorizeRoles");
 // ==============================
 router.post("/", async (req, res) => {
   try {
+    // Block new user registration
+    return res.status(403).json({
+      error:
+        "Registration is temporarily disabled. Please use the demo credentials provided in the GitHub README.",
+    });
+
+    /*
     const newUser = new User(req.body);
     await newUser.save();
 
@@ -21,6 +28,7 @@ router.post("/", async (req, res) => {
       message: "User created successfully",
       user: newUser,
     });
+    */
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
