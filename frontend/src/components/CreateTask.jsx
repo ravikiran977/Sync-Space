@@ -22,11 +22,17 @@ function CreateTask({ onCreate, defaultStatus, hideStatus, compact = false, proj
 
         const activeProjectId = projectId || localStorage.getItem("selectedProjectId");
 
+        // Only fetch users if a project is selected to avoid showing all users
+        if (!activeProjectId) {
+          setUsers([]);
+          return;
+        }
+
         const response = await api.get("/users", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-          params: activeProjectId ? { projectId: activeProjectId } : {},
+          params: { projectId: activeProjectId, role: "user" },
         });
 
         setUsers(response.data);

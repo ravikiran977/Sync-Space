@@ -50,6 +50,10 @@ router.get(
         filter.projects = req.query.projectId;
       }
 
+      if (req.query.role) {
+        filter.role = req.query.role;
+      }
+
       const users = await User.find(filter).populate("projects", "name description");
       res.status(200).json(users);
     } catch (error) {

@@ -278,7 +278,7 @@ Ravi Kiran Vempati
 Full Stack Developer (MERN)
 Passionate about scalable web applications
 
-- **LinkedIn:** Your LinkedIn Profile
+- **LinkedIn:** https://www.linkedin.com/in/leela-ravi-kiran-vempati-39a590181/
 - **GitHub:** https://github.com/ravikiran977
 
 ## ⭐ Final Note
