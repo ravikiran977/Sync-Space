@@ -70,7 +70,13 @@ router.get("/:id", validateObjectId, authMiddleware, async (req, res) => {
   try {
     const { id } = req.params;
 
-    const user = await User.findById(id);
+    if (req.user.role !== "admin" && req.user.id !== id) {
+      return res.status(403).json({ message: "Unauthorized access" });
+    }
+
+    const user = await User.findById(id)
+      .select("-password -resetPasswordToken -resetPasswordExpire")
+      .populate("projects", "name description");
 
     if (!user) {
       return res.status(404).json({
@@ -92,6 +98,10 @@ router.put("/:id", validateObjectId, authMiddleware, async (req, res) => {
   try {
     const { id } = req.params;
 
+    if (req.user.role !== "admin" && req.user.id !== id) {
+      return res.status(403).json({ message: "Unauthorized access" });
+    }
+
     const user = await User.findById(id);
 
     if (!user) {
@@ -100,13 +110,26 @@ router.put("/:id", validateObjectId, authMiddleware, async (req, res) => {
       });
     }
 
-    Object.assign(user, req.body);
+    const allowedUpdates = ["name", "email"];
+    if (req.user.role === "admin") {
+      allowedUpdates.push("role", "projects");
+    }
+
+    allowedUpdates.forEach((field) => {
+      if (Object.prototype.hasOwnProperty.call(req.body, field)) {
+        user[field] = typeof req.body[field] === "string" ? req.body[field].trim() : req.body[field];
+      }
+    });
 
     await user.save(); // ensures password hashing works
 
+    const updatedUser = await User.findById(id)
+      .select("-password -resetPasswordToken -resetPasswordExpire")
+      .populate("projects", "name description");
+
     res.status(200).json({
       message: "User Updated Successfully",
-      user: user,
+      user: updatedUser,
     });
   } catch (error) {
     res.status(500).json({ error: error.message });

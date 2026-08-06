@@ -57,6 +57,11 @@ function Navbar() {
             Projects
           </button>
         )}
+        {token && (
+          <button className="nav-button nav-button-light" onClick={() => navigate("/profile")}>
+            Profile
+          </button>
+        )}
         <button className="nav-button nav-button-danger" onClick={handleLogout}>
           Logout
         </button>
