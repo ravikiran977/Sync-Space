@@ -267,7 +267,7 @@ function UserProfile() {
                   <span className="stat-label">Projects</span>
                 </div>
                 <div className="stat">
-                  <span className="stat-value">{formatDate(user?.createdAt).split(" ")[0]}</span>
+                  <span className="stat-value">{formatDate(user?.createdAt)}</span>
                   <span className="stat-label">Member Since</span>
                 </div>
               </div>
