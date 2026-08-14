@@ -14,21 +14,39 @@ const authorizeRoles = require("../middleware/authorizeRoles");
 // ==============================
 router.post("/", async (req, res) => {
   try {
-    // Block new user registration
-    return res.status(403).json({
-      error:
-        "Registration is temporarily disabled. Please use the demo credentials provided in the GitHub README.",
+    const { name, email, password, role } = req.body;
+
+    if (!name || !email || !password) {
+      return res.status(400).json({
+        error: "Name, email, and password are required",
+      });
+    }
+
+    const normalizedEmail = email.trim().toLowerCase();
+    const existingUser = await User.findOne({ email: normalizedEmail });
+
+    if (existingUser) {
+      return res.status(409).json({
+        error: "User already exists with this email",
+      });
+    }
+
+    const newUser = new User({
+      name: name.trim(),
+      email: normalizedEmail,
+      password,
+      role: role === "admin" ? "admin" : "user",
     });
 
-    /*
-    const newUser = new User(req.body);
     await newUser.save();
+
+    const userResponse = newUser.toObject();
+    delete userResponse.password;
 
     res.status(201).json({
       message: "User created successfully",
-      user: newUser,
+      user: userResponse,
     });
-    */
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -110,7 +128,7 @@ router.put("/:id", validateObjectId, authMiddleware, async (req, res) => {
       });
     }
 
-    const allowedUpdates = ["name", "email"];
+    const allowedUpdates = ["name", "email", "phone", "department"];
     if (req.user.role === "admin") {
       allowedUpdates.push("role", "projects");
     }
@@ -263,6 +281,71 @@ router.post("/reset-password", async (req, res) => {
 
     res.status(200).json({
       message: "Password reset successful",
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// ==============================
+// CHANGE PASSWORD
+// POST /api/users/:id/change-password
+// ==============================
+router.post("/:id/change-password", validateObjectId, authMiddleware, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { oldPassword, newPassword } = req.body;
+
+    // Authorization check
+    if (req.user.role !== "admin" && req.user.id !== id) {
+      return res.status(403).json({ message: "Unauthorized access" });
+    }
+
+    // Validation
+    if (!oldPassword || !newPassword) {
+      return res.status(400).json({
+        message: "Old password and new password are required",
+      });
+    }
+
+    if (newPassword.length < 6) {
+      return res.status(400).json({
+        message: "New password must be at least 6 characters long",
+      });
+    }
+
+    // Get user with password field
+    const user = await User.findById(id).select("+password");
+
+    if (!user) {
+      return res.status(404).json({
+        message: "User Not Found",
+      });
+    }
+
+    // Verify old password
+    const isPasswordCorrect = await bcrypt.compare(oldPassword, user.password);
+
+    if (!isPasswordCorrect) {
+      return res.status(401).json({
+        message: "Current password is incorrect",
+      });
+    }
+
+    // Check if new password is different from old password
+    const isSamePassword = await bcrypt.compare(newPassword, user.password);
+    if (isSamePassword) {
+      return res.status(400).json({
+        message: "New password must be different from current password",
+      });
+    }
+
+    // Update password
+    user.password = newPassword;
+    await user.save(); // bcrypt hashing is handled by pre-save hook
+
+    res.status(200).json({
+      message: "Password changed successfully",
     });
   } catch (error) {
     res.status(500).json({ error: error.message });

@@ -20,11 +20,6 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Block registration completely
-    setError("Registration is temporarily disabled to avoid exceeding database limits. Please use the demo login credentials provided in the GitHub README file.");
-    return;
-
-    /*
     if (!name || !email || !password || !confirmPassword) {
       setError("Please fill all fields");
       return;
@@ -70,7 +65,6 @@ function Register() {
     } finally {
       setLoading(false);
     }
-    */
   };
 
   return (
@@ -148,11 +142,8 @@ function Register() {
             <option value="admin">Admin</option>
           </select>
 
-          {/* <button className="register-btn" type="submit" disabled={loading}>
+          <button className="register-btn" type="submit" disabled={loading}>
             {loading ? "Creating account..." : "Register"}
-          </button> */}
-          <button className="register-btn" type="submit" disabled={true}>
-            Registration Disabled
           </button>
         </form>
 

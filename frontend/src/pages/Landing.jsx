@@ -37,7 +37,11 @@ function Landing() {
   };
 
   const handleRegisterClick = () => {
-    alert("Registration is temporarily disabled to avoid exceeding database limits.\n\nPlease use the demo login credentials provided in the GitHub README file.");
+    navigate("/register");
+  };
+
+  const handleGitHubClick = () => {
+    window.open("https://github.com/ravikiran977/Sync-Space", "_blank");
   };
 
   return (
@@ -49,13 +53,10 @@ function Landing() {
         </div>
 
         <div className="landing-nav-actions">
-          {/* <button className="landing-register-btn" onClick={() => navigate("/register")}>
-            Register
-          </button> */}
           <button className="landing-register-btn" onClick={handleRegisterClick}>
             Register
           </button>
-          <button className="landing-register-btn" onClick={() => window.open("https://github.com/ravikiran977/Sync-Space", "_blank")}>
+          <button className="landing-register-btn" onClick={handleGitHubClick}>
             GitHub README
           </button>
           <button className="landing-login-btn" onClick={() => navigate("/login")}>
@@ -94,7 +95,7 @@ function Landing() {
 
         <div className="landing-intent-panel" aria-label="Sync-Space workflow">
           <div className="landing-intent-header">
-            <img src={logo} alt="" />
+            <img src={logo} alt="Sync-Space logo" />
             <div>
               <span>How Sync-Space works</span>
               <strong>One flow for the whole team</strong>
@@ -149,13 +150,10 @@ function Landing() {
           <span>Ready when your team is</span>
           <h2>Start with a clean workspace and a shared view of progress.</h2>
         </div>
-        {/* <button className="landing-primary-btn" onClick={() => navigate("/register")}>
-          Create Account
-        </button> */}
         <button className="landing-primary-btn" onClick={handleRegisterClick}>
           Create Account
         </button>
-        <button className="landing-secondary-btn" onClick={() => window.open("https://github.com/ravikiran977/Sync-Space", "_blank")}>
+        <button className="landing-secondary-btn" onClick={handleGitHubClick}>
           View Demo Credentials
         </button>
       </section>
@@ -176,13 +174,10 @@ function Landing() {
           <button type="button" onClick={() => navigate("/login")}>
             Login
           </button>
-          {/* <button type="button" onClick={() => navigate("/register")}>
-            Register
-          </button> */}
           <button type="button" onClick={handleRegisterClick}>
             Register
           </button>
-          <button type="button" onClick={() => window.open("https://github.com/ravikiran977/Sync-Space", "_blank")}>
+          <button type="button" onClick={handleGitHubClick}>
             GitHub README
           </button>
         </div>

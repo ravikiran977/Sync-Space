@@ -28,6 +28,14 @@ const userSchema = new mongoose.Schema(
         ref: "Project",
       },
     ],
+    phone: {
+      type: String,
+      default: null,
+    },
+    department: {
+      type: String,
+      default: null,
+    },
     resetPasswordToken: String,
     resetPasswordExpire: Date,
   },
