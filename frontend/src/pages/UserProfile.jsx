@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import api from "../api/api";
-import Navbar from "../components/Navbar";
+import Sidebar from "../components/Sidebar";
 import "../styles/UserProfile.css";
 
 const formatDate = (value) => {
@@ -239,7 +239,7 @@ function UserProfile() {
   if (loading) {
     return (
       <div className="profile-page">
-        <Navbar />
+        <Sidebar />
         <div className="profile-loading">Loading profile...</div>
       </div>
     );
@@ -247,7 +247,7 @@ function UserProfile() {
 
   return (
     <div className="profile-page">
-      <Navbar />
+      <Sidebar />
 
       <main className="profile-container">
         {error && <div className="alert alert--error">{error}</div>}

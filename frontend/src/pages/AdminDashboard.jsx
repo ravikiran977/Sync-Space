@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import api from "../api/api";
 import { useNavigate } from "react-router-dom";
-import Navbar from "../components/Navbar";
+import Sidebar from "../components/Sidebar";
 import TaskBoard from "../components/TaskBoard";
 import DashboardMessage from "../components/DashboardMessage";
 import ViewTask from "../components/ViewTask";
@@ -166,7 +166,7 @@ function AdminDashboard() {
 
   return (
     <div className="dashboard-container">
-      <Navbar />
+      <Sidebar />
 
       <header className="dashboard-header">
         <div>

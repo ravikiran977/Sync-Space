@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import api from "../api/api";
 import { useNavigate } from "react-router-dom";
-import Navbar from "../components/Navbar";
+import Sidebar from "../components/Sidebar";
 import "../styles/CreateProject.css";
 
 function CreateProject() {
@@ -52,7 +52,7 @@ function CreateProject() {
 
   return (
     <div className="create-project-page">
-      <Navbar />
+      <Sidebar />
 
       <main className="create-project-shell">
         <section className="create-project-card">

@@ -1,9 +1,9 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import logo from "../Logo.png";
-import "../styles/navbar.css";
+import "../styles/Sidebar.css";
 
-function Navbar() {
+function Sidebar() {
   const navigate = useNavigate();
   const location = useLocation();
   const token = localStorage.getItem("token");
@@ -81,4 +81,4 @@ function Navbar() {
   );
 }
 
-export default Navbar;
+export default Sidebar;

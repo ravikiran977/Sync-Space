@@ -3,7 +3,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import api from "../api/api";
 import { jwtDecode } from "jwt-decode";
-import Navbar from "../components/Navbar";
+import Sidebar from "../components/Sidebar";
 import ViewTask from "../components/ViewTask";
 import "../styles/UserDashboard.css";
 
@@ -273,7 +273,7 @@ function UserDashboard() {
 
   return (
     <div className="ud-page">
-      <Navbar />
+      <Sidebar />
 
       <div className="ud-container">
         {/* ── Header ──────────────────────────────────────────────────── */}
